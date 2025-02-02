@@ -1,0 +1,23 @@
+[project]
+name = "cryptocurrency-parser"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "InWamos",email = "mykyta.pidgornyi@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytest (>=8.3.4,<9.0.0)",
+    "sqlalchemy (>=2.0.37,<3.0.0)",
+    "aiohttp[speedups] (>=3.11.11,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.4"
+
