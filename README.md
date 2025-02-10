@@ -2,6 +2,7 @@
 
 # TODO 
 - [ ] REST API for the wallet
+  - [ ] Price History of the coin in USD
 - [ ] systemd-timers service to put the results to db
 - [ ] Dockerise with PosrgreSQL
 - [ ] Redis 
