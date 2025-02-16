@@ -7,6 +7,6 @@ class Currency:
     id: CurrencyId
     ticker: str
     full_name: str
-    max_supply: float | None
-    circulating_supply: float
+    max_supply: int | None
+    circulating_supply: int
     last_updated: datetime
