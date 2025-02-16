@@ -2,6 +2,11 @@ from datetime import datetime
 from domain.models.currency.currency import Currency
 
 class CurrencyService:
-    def create_currency(self) -> Currency:
+    def create_currency(self, full_name: str, ticker: str) -> Currency:
         last_updated = datetime.now()
-        return 
+        return Currency(
+            id=None,
+            last_updated=last_updated,
+            full_name=full_name,
+            ticker=ticker
+        )
