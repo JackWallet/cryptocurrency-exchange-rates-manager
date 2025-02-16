@@ -10,13 +10,11 @@ class CurrencyReader(Protocol):
         raise NotImplementedError
 
 
-class CurrencySaver(Protocol):
+class CurrencyWriter(Protocol):
     @abstractmethod
     async def save_currency(self, currency: Currency) -> None:
         raise NotImplementedError
 
-
-class CurrencyRemover(Protocol):
     @abstractmethod
     async def remove_currency(self, currency_id: CurrencyId) -> None:
         raise NotImplementedError
