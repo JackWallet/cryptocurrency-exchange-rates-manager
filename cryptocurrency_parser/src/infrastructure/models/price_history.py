@@ -1,5 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
+from typing import Optional
 
 from sqlalchemy import ForeignKey, Numeric
 from sqlalchemy.orm import Mapped, mapped_column
@@ -17,6 +18,8 @@ class PriceHistory(Base):
     market_cap_dominance: Mapped[float] = mapped_column(nullable=False)
     price: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=24), nullable=False)
     volume_24h: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=16))
+    max_supply: Mapped[Optional[int]]
+    circulating_supply: Mapped[int]
     percent_change_1h: Mapped[float] = mapped_column(nullable=False)
     percent_change_24h: Mapped[float] = mapped_column(nullable=False)
     percent_change_30d: Mapped[float] = mapped_column(nullable=False)
