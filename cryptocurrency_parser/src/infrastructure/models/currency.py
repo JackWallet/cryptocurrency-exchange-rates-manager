@@ -8,7 +8,7 @@ from infrastructure.models.base import Base
 
 
 class Currency(Base):
-    __tablename__ = "currency"
+    __tablename__ = "currencies"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     ticker: Mapped[str] = mapped_column(String(4))
