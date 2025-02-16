@@ -12,7 +12,7 @@ class Currency(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     ticker: Mapped[str] = mapped_column(String(4))
-    full_name: Mapped[str] = mapped_column(String(20))
+    full_name: Mapped[str] = mapped_column(String(20), unique=True)
     max_supply: Mapped[Optional[float]]
     circulating_supply: Mapped[float]
     last_updated: Mapped[Optional[datetime]]
