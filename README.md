@@ -16,7 +16,8 @@
   
 - COINMARKETCAP_API_KEY
   - "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c" for accessing the test api
-
+- UPDATE_FREQUENCY
+  - The timespan for running the update script
 - POSTGRES_HOST
 - POSTGRES_PORT
 - POSTGRES_USER
