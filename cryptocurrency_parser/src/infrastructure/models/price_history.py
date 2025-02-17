@@ -17,7 +17,7 @@ class PriceHistory(Base):
     market_cap: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=16) ,nullable=False)
     market_cap_dominance: Mapped[float] = mapped_column(nullable=False)
     price: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=24), nullable=False)
-    volume_24h: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=16))
+    volume_24h: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=16), nullable=False)
     max_supply: Mapped[Optional[int]]
     circulating_supply: Mapped[int]
     percent_change_1h: Mapped[float] = mapped_column(nullable=False)
