@@ -42,3 +42,11 @@ class PriceHistoryAdder(Protocol):
     @abstractmethod
     async def add_price_history_record(self, price_history: PriceHistory) -> None:
         raise NotImplementedError
+
+
+class PriceHistoryRemover(Protocol):
+    @abstractmethod
+    async def remove_price_history_record_by_id(
+        self, price_history_id: PriceHistoryId
+    ) -> None:
+        raise NotImplementedError
