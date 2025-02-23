@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Protocol
+from typing import Optional
 
 from application.common.interactor import Interactor
 from application.currency.currency_gateway import CurrencyWriter
