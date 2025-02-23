@@ -16,7 +16,7 @@ class PriceHistoryReader(Protocol):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_currency_id(self, currency_id: CurrencyId) -> PriceHistory:
+    async def get_by_currency_id(self, currency_id: CurrencyId) -> list[PriceHistory]:
         raise NotImplementedError
 
     @abstractmethod
@@ -26,9 +26,7 @@ class PriceHistoryReader(Protocol):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_highest_recorded_price(
-        self, currency_full_name: str
-    ) -> PriceHistory:
+    async def get_highest_recorded_price(self, currency_full_name: str) -> PriceHistory:
         raise NotImplementedError
 
     @abstractmethod
