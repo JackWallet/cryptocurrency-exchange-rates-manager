@@ -7,11 +7,7 @@ from cryptocurrency_parser.src.domain.models.currency.currency import Currency
 from domain.services.currency.currency import CurrencyService
 
 
-class CurrencyDbGateway(CurrencyWriter, Protocol):
-    pass
-
-
-@dataclass
+@dataclass(frozen=True)
 class NewCurrencyDTO:
     ticker: str
     full_name: str
@@ -21,7 +17,7 @@ class NewCurrencyDTO:
 
 class AddCurrency(Interactor[NewCurrencyDTO, None]):
     def __init__(
-        self, currency_db_gateway: CurrencyDbGateway, currency_service: CurrencyService
+        self, currency_db_gateway: CurrencyWriter, currency_service: CurrencyService
     ) -> None:
         self._currency_db_gateway = currency_db_gateway
         self._currency_service = currency_service
