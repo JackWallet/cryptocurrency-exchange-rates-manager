@@ -38,7 +38,7 @@ class PriceHistoryReader(Protocol):
         raise NotImplementedError
 
 
-class PriceHistoryWriter(Protocol):
+class PriceHistoryAdder(Protocol):
     @abstractmethod
     async def add_price_history_record(self, price_history: PriceHistory) -> None:
         raise NotImplementedError
