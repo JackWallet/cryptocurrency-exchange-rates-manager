@@ -8,7 +8,7 @@ from cryptocurrency_parser.src.domain.models.price_history.price_history_id impo
 
 @dataclass
 class PriceHistory:
-    id: PriceHistoryId
+    id: Optional[PriceHistoryId]
     currency_id: CurrencyId
     updated_at: datetime
     market_cap: Decimal
