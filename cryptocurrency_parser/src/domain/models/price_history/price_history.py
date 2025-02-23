@@ -19,7 +19,7 @@ class PriceHistory:
     circulating_supply: int
     percent_change_1h: float
     percent_change_24h: float
+    percent_change_7d: float
     percent_change_30d: float
     percent_change_60d: float
-    percent_change_7d: float
     percent_change_90d: float
