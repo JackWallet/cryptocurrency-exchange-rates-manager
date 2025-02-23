@@ -5,15 +5,20 @@ from cryptocurrency_parser.src.domain.models.currency.currency_id import Currenc
 from cryptocurrency_parser.src.domain.models.price_history.price_history import (
     PriceHistory,
 )
+from cryptocurrency_parser.src.domain.models.price_history.price_history_id import (
+    PriceHistoryId,
+)
 
 
 class PriceHistoryReader(Protocol):
     @abstractmethod
-    async def get_by_currency_id(
-        self, currency_id: CurrencyId
-    ) -> PriceHistory:
-        raise NotImplementedError        
-    
+    async def get_by_id(self, price_history_id: PriceHistoryId) -> PriceHistory:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_by_currency_id(self, currency_id: CurrencyId) -> PriceHistory:
+        raise NotImplementedError
+
     @abstractmethod
     async def get_by_currency_ids(
         self, currency_ids: list[CurrencyId]
