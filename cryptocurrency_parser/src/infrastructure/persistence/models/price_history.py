@@ -5,7 +5,7 @@ from typing import Optional
 from sqlalchemy import ForeignKey, Numeric
 from sqlalchemy.orm import Mapped, mapped_column
 
-from infrastructure.models.base import Base
+from infrastructure.persistence.models.base import Base
 
 
 class PriceHistory(Base):
