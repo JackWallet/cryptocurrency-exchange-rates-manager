@@ -29,7 +29,7 @@ class PriceHistoryReader(Protocol):
 
     @abstractmethod
     async def get_highest_recorded_price_by_currency_id(
-        self, currency_full_name: str
+        self, currency_id: CurrencyId
     ) -> PriceHistory | None:
         raise NotImplementedError
 

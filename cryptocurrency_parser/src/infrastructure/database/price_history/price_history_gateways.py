@@ -53,7 +53,16 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             if price_history
             else None
         )
+
     async def get_highest_recorded_price_by_currency_id(
-        self, currency_full_name: str
+        self, currency_id: CurrencyId
     ) -> PriceHistory | None:
-        query = select(PriceHistoryModel).where(PriceHistoryModel.)
+        query = (
+            select(PriceHistoryModel)
+            .where(PriceHistoryModel.currency_id == currency_id)
+            .order_by(PriceHistoryModel.price.desc())
+            .limit(1)
+        )
+        query_result = await self._session.execute(query)
+        price_history = query_result.scalar_one_or_none()
+        return PriceHistory(**price_history.__dict__) if price_history else None
