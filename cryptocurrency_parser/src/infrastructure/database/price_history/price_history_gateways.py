@@ -1,10 +1,8 @@
-from sqlalchemy import and_, select, insert, delete
+from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from application.price_history.price_history_gateway import (
     PriceHistoryReader,
-    PriceHistoryAdder,
-    PriceHistoryRemover,
 )
 from domain.models.currency.currency_id import CurrencyId
 from domain.models.price_history.price_history import PriceHistory
