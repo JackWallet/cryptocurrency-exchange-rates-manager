@@ -19,16 +19,20 @@ class PriceHistoryReader(Protocol):
     async def get_by_currency_id(
         self, currency_id: CurrencyId
     ) -> list[PriceHistory] | None:
+    async def get_by_currency_id(
+        self, currency_id: CurrencyId
+    ) -> list[PriceHistory] | None:
         raise NotImplementedError
 
     @abstractmethod
     async def get_by_currency_ids(
         self, currency_ids: list[CurrencyId]
     ) -> list[PriceHistory] | None:
+    ) -> list[PriceHistory] | None:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_highest_recorded_price_by_currency_full_name(
+    async def get_highest_recorded_price_by_currency_id(
         self, currency_full_name: str
     ) -> PriceHistory | None:
         raise NotImplementedError
