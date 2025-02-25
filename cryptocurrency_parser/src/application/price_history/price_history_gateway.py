@@ -12,7 +12,7 @@ from cryptocurrency_parser.src.domain.models.price_history.price_history_id impo
 
 class PriceHistoryReader(Protocol):
     @abstractmethod
-    async def get_by_id(self, price_history_id: PriceHistoryId) -> PriceHistory:
+    async def get_by_id(self, price_history_id: PriceHistoryId) -> PriceHistory | None:
         raise NotImplementedError
 
     @abstractmethod
