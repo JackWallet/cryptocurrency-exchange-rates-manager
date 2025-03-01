@@ -18,7 +18,7 @@ class SQLAlchemyDatabase(Database[AsyncSession]):
         self._session_factory = async_sessionmaker(
             self._engine, class_=AsyncSession, expire_on_commit=False, autoflush=False
         )
-
+    @asynccontextmanager
     async def get_session(self) -> AsyncGenerator[AsyncSession, None]:  # type: ignore
         async with self._session_factory() as session, session.begin():
             yield session
