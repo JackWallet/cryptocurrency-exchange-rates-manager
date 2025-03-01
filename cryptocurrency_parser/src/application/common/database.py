@@ -15,7 +15,3 @@ class Database(ABC, Generic[SessionType]):
     @abstractmethod
     async def dispose(self) -> None:
         pass
-
-    @abstractmethod
-    async def health_check(self) -> bool:
-        pass
