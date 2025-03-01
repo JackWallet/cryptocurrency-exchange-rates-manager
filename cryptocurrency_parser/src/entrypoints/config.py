@@ -17,7 +17,7 @@ class CoinmarketcapConfig:
 
 
 @dataclass
-class PostgrtresConfig:
+class PostgresConfig:
     host: str
     port: str
     user: str
@@ -30,12 +30,12 @@ class PostgrtresConfig:
         user = os.getenv("POSTGRES_USER")
         password = os.getenv("POSTGRES_PASSWORD")
 
-        return PostgrtresConfig(host=host, port=port, user=user, password=password)
+        return PostgresConfig(host=host, port=port, user=user, password=password)
 
 
 def get_coinmarketcap_config() -> CoinmarketcapConfig:
     return CoinmarketcapConfig.from_env()
 
 
-def get_postgres_config() -> PostgrtresConfig:
-    return PostgrtresConfig.from_env()
+def get_postgres_config() -> PostgresConfig:
+    return PostgresConfig.from_env()
