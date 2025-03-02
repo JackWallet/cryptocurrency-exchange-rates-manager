@@ -1,5 +1,4 @@
 import os
-
 from dataclasses import dataclass
 
 
@@ -19,15 +18,17 @@ class CoinmarketcapConfig:
 
 @dataclass
 class DatabaseConfig:
-    host: str
-    port: str
-    user: str
-    password: str
-    db_name: str
+    url: str
 
-    @property
-    def connection_url_asyncpg(self) -> str:
-        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db_name}"
+
+class DatabaseConfigFactory:
+    @staticmethod
+    def get_postgresl_asyncpg_config(
+        host: str, port: str, user: str, password: str, db_name: str
+    ) -> DatabaseConfig:
+        return DatabaseConfig(
+            url=f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{db_name}"
+        )
 
 
 def get_str_env(key: str) -> str:
@@ -52,6 +53,6 @@ def get_postgres_config() -> DatabaseConfig:
     password = get_str_env("POSTGRES_PASSWORD")
     db_name = get_str_env("POSTGRES_DB_NAME")
 
-    return DatabaseConfig(
+    return DatabaseConfigFactory.get_postgresl_asyncpg_config(
         host=host, port=port, user=user, password=password, db_name=db_name
     )
