@@ -31,5 +31,5 @@ package-mode = false
 
 [tool.pytest.ini_options]
 pythonpath = [
-    "cryptocurrency_parser"
+    "cryptocurrency_parser/src"
 ]
