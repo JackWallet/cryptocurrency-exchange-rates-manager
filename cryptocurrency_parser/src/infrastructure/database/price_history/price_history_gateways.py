@@ -2,8 +2,11 @@ from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from application.price_history.price_history_gateway import (
+    PriceHistoryAdder,
     PriceHistoryReader,
+    PriceHistoryRemover,
 )
+from cryptocurrency_parser.src.domain.exceptions.exceptions import EntityNotFoundError
 from domain.models.currency.currency_id import CurrencyId
 from domain.models.price_history.price_history import PriceHistory
 from domain.models.price_history.price_history_id import PriceHistoryId
@@ -64,3 +67,40 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         query_result = await self._session.execute(query)
         price_history = query_result.scalar_one_or_none()
         return PriceHistory(**price_history.__dict__) if price_history else None
+
+    async def get_last_record(
+        self, currency_ids: list[CurrencyId]
+    ) -> list[PriceHistory]: ...
+
+
+class SQLAlchemyPriceHistoryAdder(PriceHistoryAdder):
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
+
+    async def add_price_history_record(self, price_history: PriceHistory) -> None:
+        price_history_model = PriceHistoryModel(
+            id=price_history.id,
+            currency_id=price_history.currency_id,
+            updated_at=price_history.updated_at,
+            market_cap=price_history.market_cap,
+            market_cap_dominance=price_history.market_cap_dominance,
+            price=price_history.price,
+            volume_24h=price_history.volume_24h,
+        )
+        self._session.add(price_history_model)
+
+
+class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
+
+    async def remove_price_history_record_by_id(
+        self, price_history_id: PriceHistoryId
+    ) -> None:
+        price_history = await self._session.get(PriceHistoryModel, price_history_id)
+        if price_history:
+            await self._session.delete(price_history)
+        else:
+            raise EntityNotFoundError(
+                entity_type="PriceHistory", entity_id=price_history_id
+            )
