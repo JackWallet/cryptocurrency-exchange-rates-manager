@@ -12,7 +12,7 @@ class PriceHistory(Base):
     __tablename__ = "price_history"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    currency_id: Mapped[int] = mapped_column(ForeignKey("currency.id"), nullable=False)
+    currency_id: Mapped[int] = mapped_column(ForeignKey("currencies.id"), nullable=False)
     updated_at: Mapped[datetime] = mapped_column(nullable=False)
     market_cap: Mapped[Decimal] = mapped_column(Numeric(precision=24, scale=16) ,nullable=False)
     market_cap_dominance: Mapped[float] = mapped_column(nullable=False)
