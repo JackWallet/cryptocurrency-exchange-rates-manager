@@ -3,8 +3,8 @@
 # TODO 
 - [ ] REST API for the wallet
   - [x] Price History of the coin in USD
-  - [ ] Alembic migrations
-  - [ ] Repository with crud methods for the DB
+  - [x] Alembic migrations
+  - [x] Repository with crud methods for the DB
 - [ ] systemd-timers service to put the results to db
 - [ ] Dockerise with PosrgreSQL
 - [ ] Redis 
