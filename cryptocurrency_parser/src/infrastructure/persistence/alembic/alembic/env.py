@@ -1,19 +1,15 @@
-import sys
 from logging.config import fileConfig
-from pathlib import Path
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from cryptocurrency_parser.src.infrastructure.models import currency
 
+
+from infrastructure.persistence.models import currency
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-project_root = Path(__file__).parents[1]
-sys.path.append(str(project_root))
-sys.path.append(str(project_root / "cryptocurrency_parser" / "src"))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -70,7 +66,9 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        context.configure(
+            connection=connection, target_metadata=target_metadata
+        )
 
         with context.begin_transaction():
             context.run_migrations()
