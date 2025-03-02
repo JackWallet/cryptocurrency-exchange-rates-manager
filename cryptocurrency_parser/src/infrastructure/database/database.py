@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from application.common.database import Database
-from infrastructure.database.config import DatabaseConfig
+from entrypoints.config import DatabaseConfig
 
 
 class SQLAlchemyDatabase(Database[AsyncSession]):
