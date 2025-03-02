@@ -18,12 +18,16 @@ class CoinmarketcapConfig:
 
 
 @dataclass
-class PostgresConfig:
+class DatabaseConfig:
     host: str
     port: str
     user: str
     password: str
     db_name: str
+
+    @property
+    def connection_url_asyncpg(self) -> str:
+        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db_name}"
 
 
 def get_str_env(key: str) -> str:
@@ -41,13 +45,13 @@ def get_coinmarketcap_config() -> CoinmarketcapConfig:
     return CoinmarketcapConfig(api_link=api_link, api_key=api_key)
 
 
-def get_postgres_config() -> PostgresConfig:
+def get_postgres_config() -> DatabaseConfig:
     host = get_str_env("POSTGRES_HOST")
     port = get_str_env("POSTGRES_PORT")
     user = get_str_env("POSTGRES_USER")
     password = get_str_env("POSTGRES_PASSWORD")
     db_name = get_str_env("POSTGRES_DB_NAME")
 
-    return PostgresConfig(
+    return DatabaseConfig(
         host=host, port=port, user=user, password=password, db_name=db_name
     )
