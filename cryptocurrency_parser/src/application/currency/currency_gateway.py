@@ -6,7 +6,7 @@ from domain.models.currency.currency import Currency
 
 class CurrencyReader(Protocol):
     @abstractmethod
-    async def get_currency(self, currency_id: CurrencyId) -> Currency:
+    async def get_currency(self, currency_id: CurrencyId) -> Currency | None:
         raise NotImplementedError
 
 
