@@ -9,4 +9,6 @@ class Currency:
     id: Optional[CurrencyId]
     ticker: str
     full_name: str
-    last_updated: datetime
+    max_supply: Optional[int]
+    circulating_supply: int
+    last_updated: Optional[datetime]
