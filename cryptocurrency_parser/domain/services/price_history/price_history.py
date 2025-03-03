@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 
-from cryptocurrency_parser.src.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 from domain.models.price_history.price_history import PriceHistory
 
 

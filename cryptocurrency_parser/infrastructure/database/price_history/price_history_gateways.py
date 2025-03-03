@@ -6,7 +6,7 @@ from application.price_history.price_history_gateway import (
     PriceHistoryReader,
     PriceHistoryRemover,
 )
-from cryptocurrency_parser.src.domain.exceptions.exceptions import EntityNotFoundError
+from cryptocurrency_parser.domain.exceptions.exceptions import EntityNotFoundError
 from domain.models.currency.currency_id import CurrencyId
 from domain.models.price_history.price_history import PriceHistory
 from domain.models.price_history.price_history_id import PriceHistoryId
