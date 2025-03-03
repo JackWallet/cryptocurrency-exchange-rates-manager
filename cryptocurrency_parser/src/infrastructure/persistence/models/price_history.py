@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from infrastructure.persistence.models.base import Base
 
 
-class PriceHistory(Base):
+class PriceHistoryModel(Base):
     __tablename__ = "price_history"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)

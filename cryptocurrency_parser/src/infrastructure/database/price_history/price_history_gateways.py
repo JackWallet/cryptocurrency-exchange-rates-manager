@@ -11,7 +11,7 @@ from domain.models.currency.currency_id import CurrencyId
 from domain.models.price_history.price_history import PriceHistory
 from domain.models.price_history.price_history_id import PriceHistoryId
 from infrastructure.persistence.models.price_history import (
-    PriceHistory as PriceHistoryModel,
+    PriceHistoryModel
 )
 
 
