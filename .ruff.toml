@@ -61,4 +61,4 @@ lint.ignore = [
     "UP038",
 ]
 # Sort in alphabet order
-extend-select = ["I"]
+lint.extend-select = ["I"]
