@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
-
-from typing import Generic, TypeVar, AsyncContextManager
-
+from typing import AsyncContextManager, Generic, TypeVar
 
 SessionType = TypeVar("SessionType")
 

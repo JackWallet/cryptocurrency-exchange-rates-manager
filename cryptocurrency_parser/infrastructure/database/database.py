@@ -1,15 +1,15 @@
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
-    AsyncSession,
     AsyncEngine,
-    create_async_engine,
+    AsyncSession,
     async_sessionmaker,
+    create_async_engine,
 )
 
-from application.common.database import Database
-from entrypoints.config import DatabaseConfig
+from cryptocurrency_parser.application.common.database import Database
+from cryptocurrency_parser.entrypoints.config import DatabaseConfig
 
 
 class SQLAlchemyDatabase(Database[AsyncSession]):

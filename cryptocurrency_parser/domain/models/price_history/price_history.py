@@ -3,8 +3,11 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 
-from cryptocurrency_parser.src.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.src.domain.models.price_history.price_history_id import PriceHistoryId
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+    PriceHistoryId,
+)
+
 
 @dataclass
 class PriceHistory:

@@ -1,5 +1,7 @@
 from datetime import datetime
-from domain.models.currency.currency import Currency
+
+from cryptocurrency_parser.domain.models.currency.currency import Currency
+
 
 class CurrencyService:
     def create_currency(self, full_name: str, ticker: str) -> Currency:

@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
-from domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+
 
 @dataclass
 class Currency:

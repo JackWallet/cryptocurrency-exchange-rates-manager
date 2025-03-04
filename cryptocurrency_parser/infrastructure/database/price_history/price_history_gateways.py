@@ -1,17 +1,23 @@
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from application.price_history.price_history_gateway import (
+from cryptocurrency_parser.application.price_history.price_history_gateway import (
     PriceHistoryAdder,
     PriceHistoryReader,
     PriceHistoryRemover,
 )
-from cryptocurrency_parser.domain.exceptions.exceptions import EntityNotFoundError
-from domain.models.currency.currency_id import CurrencyId
-from domain.models.price_history.price_history import PriceHistory
-from domain.models.price_history.price_history_id import PriceHistoryId
-from infrastructure.persistence.models.price_history import (
-    PriceHistoryModel
+from cryptocurrency_parser.domain.exceptions.exceptions import (
+    EntityNotFoundError,
+)
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.models.price_history.price_history import (
+    PriceHistory,
+)
+from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+    PriceHistoryId,
+)
+from cryptocurrency_parser.infrastructure.persistence.models.price_history import (
+    PriceHistoryModel,
 )
 
 

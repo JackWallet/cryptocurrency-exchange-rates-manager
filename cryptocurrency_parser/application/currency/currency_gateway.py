@@ -1,7 +1,8 @@
 from abc import abstractmethod
 from typing import Protocol
-from domain.models.currency.currency_id import CurrencyId
-from domain.models.currency.currency import Currency
+
+from cryptocurrency_parser.domain.models.currency.currency import Currency
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 
 
 class CurrencyReader(Protocol):

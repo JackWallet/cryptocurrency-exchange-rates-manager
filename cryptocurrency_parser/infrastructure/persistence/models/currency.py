@@ -4,7 +4,7 @@ from typing import Optional
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from infrastructure.persistence.models.base import Base
+from cryptocurrency_parser.infrastructure.persistence.models.base import Base
 
 
 class CurrencyModel(Base):

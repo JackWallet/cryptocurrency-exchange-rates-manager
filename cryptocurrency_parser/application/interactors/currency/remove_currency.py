@@ -1,9 +1,13 @@
 from dataclasses import dataclass
 
-from application.common.interactor import Interactor
-from application.common.transaction_manager import TransactionManager
-from application.currency.currency_gateway import CurrencyWriter
-from cryptocurrency_parser.src.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.application.common.interactor import Interactor
+from cryptocurrency_parser.application.common.transaction_manager import (
+    TransactionManager,
+)
+from cryptocurrency_parser.application.currency.currency_gateway import (
+    CurrencyWriter,
+)
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass(frozen=True)

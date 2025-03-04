@@ -3,13 +3,17 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 
-from domain.services.price_history.price_history import PriceHistoryService
-from domain.models.currency.currency_id import CurrencyId
-from application.common.interactor import Interactor
-from application.price_history.price_history_gateway import (
+from cryptocurrency_parser.application.common.interactor import Interactor
+from cryptocurrency_parser.application.common.transaction_manager import (
+    TransactionManager,
+)
+from cryptocurrency_parser.application.price_history.price_history_gateway import (
     PriceHistoryAdder,
 )
-from application.common.transaction_manager import TransactionManager
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.services.price_history.price_history import (
+    PriceHistoryService,
+)
 
 
 @dataclass(frozen=True)

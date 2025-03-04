@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from decimal import Decimal
-from typing import Optional
 
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from domain.models.price_history.price_history import PriceHistory
+from cryptocurrency_parser.domain.models.price_history.price_history import (
+    PriceHistory,
+)
 
 
 class PriceHistoryService:
@@ -14,7 +15,7 @@ class PriceHistoryService:
         market_cap_dominance: float,
         price: Decimal,
         volume_24h: Decimal,
-        max_supply: Optional[int],
+        max_supply: int | None,
         circulating_supply: int,
         percent_change_1h: float,
         percent_change_24h: float,
@@ -38,5 +39,5 @@ class PriceHistoryService:
             percent_change_60d=percent_change_60d,
             percent_change_7d=percent_change_7d,
             percent_change_90d=percent_change_90d,
-            updated_at=datetime.now(),
+            updated_at=datetime.now(tz=UTC),
         )

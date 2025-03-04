@@ -1,9 +1,15 @@
 from dataclasses import dataclass
 
-from domain.models.price_history.price_history import PriceHistory
-from domain.models.price_history.price_history_id import PriceHistoryId
-from application.common.interactor import Interactor
-from application.price_history.price_history_gateway import PriceHistoryReader
+from cryptocurrency_parser.application.common.interactor import Interactor
+from cryptocurrency_parser.application.price_history.price_history_gateway import (
+    PriceHistoryReader,
+)
+from cryptocurrency_parser.domain.models.price_history.price_history import (
+    PriceHistory,
+)
+from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+    PriceHistoryId,
+)
 
 
 @dataclass(frozen=True)
