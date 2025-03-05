@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional
 
 from cryptocurrency_parser.application.common.interactor import Interactor
 from cryptocurrency_parser.application.common.transaction_manager import (
@@ -24,7 +23,7 @@ class AddPriceHistoryDTO:
     market_cap_dominance: float
     price: Decimal
     volume_24h: Decimal
-    max_supply: Optional[int]
+    max_supply: int | None
     circulating_supply: int
     percent_change_1h: float
     percent_change_24h: float
@@ -62,6 +61,6 @@ class AddPriceHistory(Interactor[AddPriceHistoryDTO, None]):
             percent_change_90d=data.percent_change_90d,
         )
         await self._price_history_db_gateway.add_price_history_record(
-            price_history=price_history
+            price_history=price_history,
         )
         await self._transaction_manager.commit()

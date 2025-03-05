@@ -26,5 +26,5 @@ class GetPriceHistoryById(Interactor[GetPriceHistoryDTO, PriceHistory]):
 
     async def __call__(self, data: GetPriceHistoryDTO) -> PriceHistory:
         return await self._price_history_db_gateway.get_by_id(
-            price_history_id=data.price_history_id
+            price_history_id=data.price_history_id,
         )

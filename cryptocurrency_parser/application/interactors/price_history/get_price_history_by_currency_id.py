@@ -21,15 +21,18 @@ class PriceHistoryResultDTO:
 
 
 class GetPriceHistoryByCurrencyId(
-    Interactor[GetPriceHistoryByCurrencyIdDTO, PriceHistoryResultDTO]
+    Interactor[GetPriceHistoryByCurrencyIdDTO, PriceHistoryResultDTO],
 ):
     def __init__(self, price_history_db_gateway: PriceHistoryReader) -> None:
         self._price_history_db_gateway = price_history_db_gateway
 
     async def __call__(
-        self, data: GetPriceHistoryByCurrencyIdDTO
+        self,
+        data: GetPriceHistoryByCurrencyIdDTO,
     ) -> PriceHistoryResultDTO:
-        price_history = await self._price_history_db_gateway.get_by_currency_id(
-            currency_id=data.currency_id
+        price_history = (
+            await self._price_history_db_gateway.get_by_currency_id(
+                currency_id=data.currency_id,
+            )
         )
         return PriceHistoryResultDTO(currencies=price_history)

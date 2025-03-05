@@ -1,15 +1,14 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
 
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass
 class Currency:
-    id: Optional[CurrencyId]
+    id: CurrencyId | None
     ticker: str
     full_name: str
-    max_supply: Optional[int]
+    max_supply: int | None
     circulating_supply: int
-    last_updated: Optional[datetime]
+    last_updated: datetime | None

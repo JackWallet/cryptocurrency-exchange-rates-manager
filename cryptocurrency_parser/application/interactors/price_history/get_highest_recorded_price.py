@@ -14,7 +14,9 @@ class GetHighestRecordedPriceDTO:
     full_name: str
 
 
-class GetHighestRecordedPrice(Interactor[GetHighestRecordedPriceDTO, PriceHistory]):
+class GetHighestRecordedPrice(
+    Interactor[GetHighestRecordedPriceDTO, PriceHistory]
+):
     def __init__(
         self,
         price_history_db_gateway: PriceHistoryReader,
@@ -23,5 +25,5 @@ class GetHighestRecordedPrice(Interactor[GetHighestRecordedPriceDTO, PriceHistor
 
     async def __call__(self, data: GetHighestRecordedPriceDTO) -> PriceHistory:
         return await self._price_history_db_gateway.get_highest_recorded_price(
-            currency_full_name=data.full_name
+            currency_full_name=data.full_name,
         )

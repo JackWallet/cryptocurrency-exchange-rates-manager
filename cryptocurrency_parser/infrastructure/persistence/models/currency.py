@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Optional
 
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
@@ -13,6 +12,6 @@ class CurrencyModel(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     ticker: Mapped[str] = mapped_column(String(4))
     full_name: Mapped[str] = mapped_column(String(20), unique=True)
-    max_supply: Mapped[Optional[int]]
+    max_supply: Mapped[int | None]
     circulating_supply: Mapped[int]
-    last_updated: Mapped[Optional[datetime]]
+    last_updated: Mapped[datetime | None]

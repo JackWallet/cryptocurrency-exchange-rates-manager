@@ -24,10 +24,14 @@ class DatabaseConfig:
 class DatabaseConfigFactory:
     @staticmethod
     def get_postgresl_asyncpg_config(
-        host: str, port: str, user: str, password: str, db_name: str
+        host: str,
+        port: str,
+        user: str,
+        password: str,
+        db_name: str,
     ) -> DatabaseConfig:
         return DatabaseConfig(
-            url=f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{db_name}"
+            url=f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{db_name}",
         )
 
 
@@ -54,5 +58,9 @@ def get_postgres_config() -> DatabaseConfig:
     db_name = get_str_env("POSTGRES_DB_NAME")
 
     return DatabaseConfigFactory.get_postgresl_asyncpg_config(
-        host=host, port=port, user=user, password=password, db_name=db_name
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        db_name=db_name,
     )

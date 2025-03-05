@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 from cryptocurrency_parser.application.common.interactor import Interactor
 from cryptocurrency_parser.application.common.transaction_manager import (
@@ -18,7 +17,7 @@ from cryptocurrency_parser.domain.services.currency.currency import (
 class NewCurrencyDTO:
     ticker: str
     full_name: str
-    max_supply: Optional[int]
+    max_supply: int | None
     circulating_supply: int
 
 

@@ -10,5 +10,5 @@ class CurrencyService:
             id=None,
             last_updated=last_updated,
             full_name=full_name,
-            ticker=ticker
+            ticker=ticker,
         )

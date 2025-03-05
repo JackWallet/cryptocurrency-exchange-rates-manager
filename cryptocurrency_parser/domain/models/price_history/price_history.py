@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional
 
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 from cryptocurrency_parser.domain.models.price_history.price_history_id import (
@@ -11,14 +10,14 @@ from cryptocurrency_parser.domain.models.price_history.price_history_id import (
 
 @dataclass
 class PriceHistory:
-    id: Optional[PriceHistoryId]
+    id: PriceHistoryId | None
     currency_id: CurrencyId
     updated_at: datetime
     market_cap: Decimal
     market_cap_dominance: float
     price: Decimal
     volume_24h: Decimal
-    max_supply: Optional[int]
+    max_supply: int | None
     circulating_supply: int
     percent_change_1h: float
     percent_change_24h: float

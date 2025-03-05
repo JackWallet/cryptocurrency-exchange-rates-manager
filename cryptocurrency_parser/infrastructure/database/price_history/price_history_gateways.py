@@ -106,6 +106,8 @@ class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
         self,
         price_history_id: PriceHistoryId,
     ) -> None:
+        # TODO(<W>): Remove logic from here and focus on the database operations
+        # instead of avaliability checks
         price_history = await self._session.get(
             PriceHistoryModel,
             price_history_id,

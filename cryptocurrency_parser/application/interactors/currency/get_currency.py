@@ -27,5 +27,5 @@ class RemoveCurrency(Interactor[GetCurrencyDTO, Currency]):
 
     async def __call__(self, data: GetCurrencyDTO) -> Currency:
         return await self._currency_db_gateway.get_currency(
-            currency_id=data.currency_id
+            currency_id=data.currency_id,
         )
