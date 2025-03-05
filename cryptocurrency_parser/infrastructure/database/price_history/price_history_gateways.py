@@ -25,19 +25,23 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def get_by_id(self, price_history_id: PriceHistoryId) -> PriceHistory | None:
+    async def get_by_id(
+        self, price_history_id: PriceHistoryId,
+    ) -> PriceHistory | None:
         query = select(PriceHistoryModel).where(
-            PriceHistoryModel.id == price_history_id
+            PriceHistoryModel.id == price_history_id,
         )
         query_result = await self._session.execute(query)
         price_history = query_result.scalar_one_or_none()
-        return PriceHistory(**price_history.__dict__) if price_history else None
+        return (
+            PriceHistory(**price_history.__dict__) if price_history else None
+        )
 
     async def get_by_currency_id(
-        self, currency_id: CurrencyId
+        self, currency_id: CurrencyId,
     ) -> list[PriceHistory] | None:
         query = select(PriceHistoryModel).where(
-            PriceHistoryModel.currency_id == currency_id
+            PriceHistoryModel.currency_id == currency_id,
         )
         query_result = await self._session.execute(query)
         price_history = query_result.scalars()
@@ -48,10 +52,10 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         )
 
     async def get_by_currency_ids(
-        self, currency_ids: list[CurrencyId]
+        self, currency_ids: list[CurrencyId],
     ) -> list[PriceHistory] | None:
         query = select(PriceHistoryModel).where(
-            and_(PriceHistoryModel.currency_id.in_(currency_ids))
+            and_(PriceHistoryModel.currency_id.in_(currency_ids)),
         )
         query_result = await self._session.execute(query)
         price_history = query_result.scalars()
@@ -62,7 +66,8 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         )
 
     async def get_highest_recorded_price_by_currency_id(
-        self, currency_id: CurrencyId
+        self,
+        currency_id: CurrencyId,
     ) -> PriceHistory | None:
         query = (
             select(PriceHistoryModel)
@@ -72,10 +77,12 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         )
         query_result = await self._session.execute(query)
         price_history = query_result.scalar_one_or_none()
-        return PriceHistory(**price_history.__dict__) if price_history else None
+        return (
+            PriceHistory(**price_history.__dict__) if price_history else None
+        )
 
     async def get_last_record(
-        self, currency_ids: list[CurrencyId]
+        self, currency_ids: list[CurrencyId],
     ) -> list[PriceHistory]: ...
 
 
@@ -83,7 +90,9 @@ class SQLAlchemyPriceHistoryAdder(PriceHistoryAdder):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def add_price_history_record(self, price_history: PriceHistory) -> None:
+    async def add_price_history_record(
+        self, price_history: PriceHistory,
+    ) -> None:
         price_history_model = PriceHistoryModel(
             id=price_history.id,
             currency_id=price_history.currency_id,
@@ -101,12 +110,14 @@ class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
         self._session = session
 
     async def remove_price_history_record_by_id(
-        self, price_history_id: PriceHistoryId
+        self, price_history_id: PriceHistoryId,
     ) -> None:
-        price_history = await self._session.get(PriceHistoryModel, price_history_id)
+        price_history = await self._session.get(
+            PriceHistoryModel, price_history_id,
+        )
         if price_history:
             await self._session.delete(price_history)
         else:
             raise EntityNotFoundError(
-                entity_type="PriceHistory", entity_id=price_history_id
+                entity_type="PriceHistory", entity_id=price_history_id,
             )
