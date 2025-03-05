@@ -1,13 +1,13 @@
 import pytest
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from cryptocurrency_parser.src.entrypoints.config import (
+from cryptocurrency_parser.entrypoints.config import (
     DatabaseConfig,
     get_postgres_config,
 )
-from cryptocurrency_parser.src.infrastructure.database.database import (
+from cryptocurrency_parser.infrastructure.database.database import (
     SQLAlchemyDatabase,
 )
 
