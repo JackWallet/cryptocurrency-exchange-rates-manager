@@ -35,19 +35,7 @@ target-version = "py312"
 
 lint.select = ["ALL"]
 lint.ignore = [
-    "ARG",
-    "ANN",
     "D",
-    "EM101",
-    "EM102",
-    "PT001",
-    "PT023",
-    "SIM108",
-    "RET505",
-    "PLR0913",
-    "SIM103",
-    "ISC003",
-
     # identitcal by code != identical by meaning
     "SIM114",
 
