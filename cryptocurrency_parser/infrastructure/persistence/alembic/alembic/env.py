@@ -3,17 +3,17 @@ import os
 import sys
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import Connection
 from sqlalchemy.ext.asyncio import create_async_engine
-
-from alembic import context
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from infrastructure.persistence.models import base
 from entrypoints.config import DatabaseConfig, get_postgres_config
+from infrastructure.persistence.models import base
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -64,7 +64,7 @@ def run_migrations_offline() -> None:
 def do_run_migrations(connection: Connection):
     context.configure(
         connection=connection,
-        target_metadata=target_metadata
+        target_metadata=target_metadata,
     )
 
     with context.begin_transaction():
@@ -81,7 +81,7 @@ async def run_async_migrations() -> None:
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)
 
-    await connectable.dispose()    
+    await connectable.dispose()
 
 def run_migrations_online() -> None:
     asyncio.run(run_async_migrations())

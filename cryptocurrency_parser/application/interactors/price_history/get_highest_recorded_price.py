@@ -15,7 +15,7 @@ class GetHighestRecordedPriceDTO:
 
 
 class GetHighestRecordedPrice(
-    Interactor[GetHighestRecordedPriceDTO, PriceHistory]
+    Interactor[GetHighestRecordedPriceDTO, PriceHistory],
 ):
     def __init__(
         self,
