@@ -27,7 +27,7 @@ pytest-cov = "^6.0.0"
 pytest-asyncio = "^0.25.3"
 
 
-[tool.poetry.group.def.dependencies]
+[tool.poetry.group.dev.dependencies]
 mypy = "^1.15.0"
 ruff = "^0.9.9"
 
