@@ -7,7 +7,7 @@ SessionType = TypeVar("SessionType")
 
 class Database(ABC, Generic[SessionType]):
     @abstractmethod
-    async def get_session(self) -> AbstractAsyncContextManager[SessionType]:
+    def get_session(self) -> AbstractAsyncContextManager[SessionType]:
         pass
 
     @abstractmethod
