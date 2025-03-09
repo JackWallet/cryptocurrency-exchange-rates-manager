@@ -5,7 +5,7 @@ from cryptocurrency_parser.application.common.transaction_manager import (
     TransactionManager,
 )
 from cryptocurrency_parser.application.currency.currency_gateway import (
-    CurrencyWriter,
+    CurrencyRemover,
 )
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 
@@ -18,7 +18,7 @@ class RemoveCurrencyDTO:
 class RemoveCurrency(Interactor[RemoveCurrencyDTO, None]):
     def __init__(
         self,
-        currency_db_gateway: CurrencyWriter,
+        currency_db_gateway: CurrencyRemover,
         transaction_manager: TransactionManager,
     ) -> None:
         self._currency_db_gateway = currency_db_gateway
