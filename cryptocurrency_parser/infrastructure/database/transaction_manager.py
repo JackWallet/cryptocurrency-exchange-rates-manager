@@ -15,8 +15,8 @@ class SQLAlchemyTransactionManager(TransactionManager):
         self._database = database
 
     @asynccontextmanager
-    async def transaction(self) -> AsyncGenerator[AsyncSession, None]:
-        async with self._database.get_session() as session:
+    async def transaction(self) -> AsyncGenerator[AsyncSession, None]: # type: ignore  # noqa: PGH003
+        async with self._database.get_session() as session, session.begin():
             try:
                 yield session
                 await session.commit()

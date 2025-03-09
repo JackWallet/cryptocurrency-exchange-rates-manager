@@ -24,7 +24,7 @@ class SQLAlchemyDatabase(Database[AsyncSession]):
 
     @asynccontextmanager
     async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
-        async with self._session_factory() as session, session.begin():
+        async with self._session_factory() as session:
             yield session
 
     async def dispose(self) -> None:
