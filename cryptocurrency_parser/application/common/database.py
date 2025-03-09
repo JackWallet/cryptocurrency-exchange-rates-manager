@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import AsyncContextManager, Generic, TypeVar
+from contextlib import AbstractAsyncContextManager
+from typing import Generic, TypeVar
 
 SessionType = TypeVar("SessionType")
 
 
 class Database(ABC, Generic[SessionType]):
     @abstractmethod
-    async def get_session(self) -> AsyncContextManager[SessionType]:
+    async def get_session(self) -> AbstractAsyncContextManager[SessionType]:
         pass
 
     @abstractmethod
