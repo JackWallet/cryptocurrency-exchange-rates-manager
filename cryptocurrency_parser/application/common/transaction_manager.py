@@ -1,11 +1,13 @@
 from abc import abstractmethod
 from contextlib import AbstractAsyncContextManager
-from typing import Protocol, TypeVar
+from typing import Protocol
 
-SessionType = TypeVar("SessionType")
+from sqlalchemy.ext.asyncio import AsyncSessionTransaction
 
 
 class TransactionManager(Protocol):
     @abstractmethod
-    async def transaction(self) -> AbstractAsyncContextManager[SessionType]:
+    def transaction(
+        self,
+    ) -> AbstractAsyncContextManager[AsyncSessionTransaction]:
         pass

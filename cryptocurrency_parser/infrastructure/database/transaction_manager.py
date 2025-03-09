@@ -2,21 +2,22 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, AsyncSessionTransaction
 
-from cryptocurrency_parser.application.common.database import Database
 from cryptocurrency_parser.application.common.transaction_manager import (
     TransactionManager,
 )
 
 
 class SQLAlchemyTransactionManager(TransactionManager):
-    def __init__(self, database: Database[AsyncSession]) -> None:
-        self._database = database
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
 
     @asynccontextmanager
-    async def transaction(self) -> AsyncGenerator[AsyncSession, None]: # type: ignore  # noqa: PGH003
-        async with self._database.get_session() as session, session.begin():
+    async def transaction(
+        self,
+    ) -> AsyncGenerator[AsyncSessionTransaction, None]:
+        async with self._session.begin() as session:
             try:
                 yield session
                 await session.commit()
