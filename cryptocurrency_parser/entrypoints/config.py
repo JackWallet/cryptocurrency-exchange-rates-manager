@@ -41,5 +41,10 @@ class PostgresConfig:
         return PostgresConfig(**env_variables)
 
 
-def load_postgres_config() -> PostgresConfig:
-    return PostgresConfig.from_env()
+@dataclass(frozen=True)
+class Config:
+    postgres_config: PostgresConfig
+
+
+def load_config() -> Config:
+    return Config(postgres_config=PostgresConfig.from_env())
