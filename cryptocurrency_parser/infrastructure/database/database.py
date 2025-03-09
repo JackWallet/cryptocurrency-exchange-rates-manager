@@ -9,11 +9,11 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from cryptocurrency_parser.application.common.database import Database
-from cryptocurrency_parser.entrypoints.config import DatabaseConfig
+from cryptocurrency_parser.entrypoints.config import PostgresConfig
 
 
 class SQLAlchemyDatabase(Database[AsyncSession]):
-    def __init__(self, config: DatabaseConfig) -> None:
+    def __init__(self, config: PostgresConfig) -> None:
         self._engine: AsyncEngine = create_async_engine(url=config.url)
         self._session_factory = async_sessionmaker(
             self._engine,
