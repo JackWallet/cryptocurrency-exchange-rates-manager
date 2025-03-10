@@ -1,13 +1,10 @@
-from sqlalchemy import and_, select
+from sqlalchemy import and_, delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptocurrency_parser.application.price_history.price_history_gateway import (
     PriceHistoryAdder,
     PriceHistoryReader,
     PriceHistoryRemover,
-)
-from cryptocurrency_parser.domain.exceptions.exceptions import (
-    EntityNotFoundError,
 )
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 from cryptocurrency_parser.domain.models.price_history.price_history import (
@@ -106,16 +103,7 @@ class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
         self,
         price_history_id: PriceHistoryId,
     ) -> None:
-        # TODO(<W>): Remove logic from here and focus on the database operations
-        # instead of avaliability checks
-        price_history = await self._session.get(
-            PriceHistoryModel,
-            price_history_id,
+        query = delete(PriceHistoryModel).where(
+            PriceHistoryModel.id == price_history_id,
         )
-        if price_history:
-            await self._session.delete(price_history)
-        else:
-            raise EntityNotFoundError(
-                entity_type="PriceHistory",
-                entity_id=price_history_id,
-            )
+        await self._session.execute(query)
