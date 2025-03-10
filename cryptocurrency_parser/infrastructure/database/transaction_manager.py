@@ -14,5 +14,8 @@ class SQLAlchemyTransactionManager(TransactionManager):
         try:
             await self._session.commit()
         except SQLAlchemyError:
-            await self._session.rollback()
+            await self.rollback()
             raise
+
+    async def rollback(self) -> None:
+        await self._session.rollback()
