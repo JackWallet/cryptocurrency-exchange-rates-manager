@@ -13,6 +13,9 @@ from cryptocurrency_parser.domain.models.price_history.price_history import (
 from cryptocurrency_parser.domain.models.price_history.price_history_id import (
     PriceHistoryId,
 )
+from cryptocurrency_parser.infrastructure.persistence.models.currency import (
+    CurrencyModel,
+)
 from cryptocurrency_parser.infrastructure.persistence.models.price_history import (
     PriceHistoryModel,
 )
@@ -71,8 +74,13 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
 
     async def get_last_record(
         self,
-        currency_ids: list[CurrencyId],
-    ) -> list[PriceHistory]: ...
+        currency_ids: tuple[CurrencyId],
+    ) -> list[PriceHistory]:
+        pass
+        # query = select(PriceHistory).where(PriceHistory.currency_id == )
+        # query = select(PriceHistory).join(
+        #     CurrencyModel, PriceHistoryModel.currency_id == CurrencyModel.id
+        # ).where()
 
 
 class SQLAlchemyPriceHistoryAdder(PriceHistoryAdder):
