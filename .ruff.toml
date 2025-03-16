@@ -50,3 +50,6 @@ lint.ignore = [
 ]
 # Sort in alphabet order
 lint.extend-select = ["I"]
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
