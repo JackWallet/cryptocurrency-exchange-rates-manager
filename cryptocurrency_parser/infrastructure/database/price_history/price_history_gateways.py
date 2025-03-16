@@ -33,8 +33,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             PriceHistoryModel.id == price_history_id,
         )
         query_result = await self._session.execute(query)
-        price_history = query_result.scalar_one_or_none()
-        return price_history if price_history else None
+        return query_result.scalar_one_or_none()
 
     async def get_by_currency_id(
         self,
@@ -72,15 +71,14 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         price_history = query_result.scalar_one_or_none()
         return price_history if price_history else None
 
-    async def get_last_record(
-        self,
-        currency_ids: tuple[CurrencyId],
-    ) -> list[PriceHistory]:
-        pass
-        # query = select(PriceHistory).where(PriceHistory.currency_id == )
-        # query = select(PriceHistory).join(
-        #     CurrencyModel, PriceHistoryModel.currency_id == CurrencyModel.id
-        # ).where()
+    # async def get_last_record(
+    #     self,
+    #     currency_ids: tuple[CurrencyId],
+    # ) -> list[PriceHistory]:
+    #     query = select(PriceHistory).where(PriceHistory.currency_id == )
+    #     query = select(PriceHistory).join(
+    #         CurrencyModel, PriceHistoryModel.currency_id == CurrencyModel.id
+    #     ).where()
 
 
 class SQLAlchemyPriceHistoryAdder(PriceHistoryAdder):
