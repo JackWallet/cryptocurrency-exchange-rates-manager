@@ -16,12 +16,25 @@ class SQLAlchemyCurrencyReader(CurrencyReader):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
+    def _to_domain(self, currency_model: CurrencyModel) -> Currency:
+        return Currency(
+            id=CurrencyId(currency_model.id),
+            ticker=currency_model.ticker,
+            full_name=currency_model.full_name,
+            max_supply=currency_model.max_supply,
+            circulating_supply=currency_model.circulating_supply,
+            last_updated=currency_model.last_updated,
+        )
+
     async def get_currency(self, currency_id: CurrencyId) -> Currency | None:
-        # TODO fix return
-        query = select(Currency).where(CurrencyModel.id == currency_id)
+        query = select(CurrencyModel).where(CurrencyModel.id == currency_id)
         result = await self._session.execute(query)
         currency = result.scalar_one_or_none()
-        return currency if currency else None
+        return (
+            self._to_domain(currency)
+            if isinstance(currency, CurrencyModel)
+            else None
+        )
 
 
 class SQLAlchemyCurrencyAdder(CurrencyAdder):
