@@ -11,14 +11,14 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from entrypoints.config import DatabaseConfig, get_postgres_config
-from infrastructure.persistence.models import base
+from cryptocurrency_parser.entrypoints.config import PostgresConfig
+from cryptocurrency_parser.infrastructure.persistence.models import base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 # Set pgsql config
-pgsql_config: DatabaseConfig = get_postgres_config()
+pgsql_config: PostgresConfig = PostgresConfig.from_env()
 config.set_main_option("sqlalchemy.url", pgsql_config.url)
 
 # Interpret the config file for Python logging.
