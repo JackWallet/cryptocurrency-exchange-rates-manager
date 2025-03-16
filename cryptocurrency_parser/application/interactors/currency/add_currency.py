@@ -5,7 +5,7 @@ from cryptocurrency_parser.application.common.transaction_manager import (
     TransactionManager,
 )
 from cryptocurrency_parser.application.currency.currency_gateway import (
-    CurrencyWriter,
+    CurrencyAdder,
 )
 from cryptocurrency_parser.domain.models.currency.currency import Currency
 from cryptocurrency_parser.domain.services.currency.currency import (
@@ -24,7 +24,7 @@ class NewCurrencyDTO:
 class AddCurrency(Interactor[NewCurrencyDTO, None]):
     def __init__(
         self,
-        currency_db_gateway: CurrencyWriter,
+        currency_db_gateway: CurrencyAdder,
         currency_service: CurrencyService,
         transaction_manager: TransactionManager,
     ) -> None:
