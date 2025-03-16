@@ -1,14 +1,11 @@
 from collections.abc import AsyncGenerator
 
 from dishka import Provider, Scope, from_context, provide
-from sqlalchemy.ext.asyncio import AsyncSessionTransaction
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptocurrency_parser.entrypoints.config import Config
 from cryptocurrency_parser.infrastructure.database.database import (
     SQLAlchemyDatabase,
-)
-from cryptocurrency_parser.infrastructure.database.transaction_manager import (
-    SQLAlchemyTransactionManager,
 )
 
 
@@ -23,11 +20,9 @@ class SQLAlchemyProvider(Provider):
         return SQLAlchemyDatabase(config.postgres_config)
 
     @provide(scope=Scope.REQUEST)
-    async def provide_transaction_manager(
+    async def provide_session(
         self,
         database: SQLAlchemyDatabase,
-    ) -> AsyncGenerator[AsyncSessionTransaction, None]:
+    ) -> AsyncGenerator[AsyncSession, None]:
         async with database.get_session() as session:
-            transaction_manager = SQLAlchemyTransactionManager(session=session)
-            async with transaction_manager.transaction() as transaction:
-                yield transaction
+            yield session
