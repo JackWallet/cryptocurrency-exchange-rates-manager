@@ -26,7 +26,7 @@ class PostgresConfig:
 
     @property
     def url(self) -> str:
-        return "postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db_name}"
+        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db}"
 
     @staticmethod
     def from_env() -> "PostgresConfig":
