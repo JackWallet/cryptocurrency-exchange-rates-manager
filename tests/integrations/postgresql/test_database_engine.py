@@ -4,8 +4,7 @@ from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptocurrency_parser.entrypoints.config import (
-    DatabaseConfig,
-    get_postgres_config,
+    PostgresConfig,
 )
 from cryptocurrency_parser.infrastructure.database.database import (
     SQLAlchemyDatabase,
@@ -14,16 +13,22 @@ from cryptocurrency_parser.infrastructure.database.database import (
 
 @pytest.fixture(scope="package")
 def database() -> SQLAlchemyDatabase:
-    config: DatabaseConfig = get_postgres_config()
+    config: PostgresConfig = PostgresConfig.from_env()
     return SQLAlchemyDatabase(config=config)
 
+
 @pytest.mark.asyncio
-async def test_can_establish_database_connection(database: SQLAlchemyDatabase) -> None:
+async def test_can_establish_database_connection(
+    database: SQLAlchemyDatabase,
+) -> None:
     async with database.get_session() as session:
         assert isinstance(session, AsyncSession)
 
+
 @pytest.mark.asyncio
-async def test_can_close_the_db_connection(database: SQLAlchemyDatabase) -> None:
+async def test_can_close_the_db_connection(
+    database: SQLAlchemyDatabase,
+) -> None:
     await database.dispose()
 
     with pytest.raises(InvalidRequestError):
