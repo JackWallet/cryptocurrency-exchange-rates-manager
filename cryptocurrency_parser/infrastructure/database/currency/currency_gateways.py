@@ -1,9 +1,10 @@
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptocurrency_parser.application.currency.currency_gateway import (
     CurrencyAdder,
     CurrencyReader,
+    CurrencyRemover,
 )
 from cryptocurrency_parser.domain.models.currency.currency import Currency
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
@@ -54,3 +55,12 @@ class SQLAlchemyCurrencyAdder(CurrencyAdder):
     async def save_currency(self, currency: Currency) -> None:
         currency_model = self._to_model(currency=currency)
         self._session.add(currency_model)
+
+
+class SQLAlchemyCurrencyRemover(CurrencyRemover):
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
+
+    async def remove_currency(self, currency_id: CurrencyId) -> None:
+        query = delete(CurrencyModel).where(CurrencyModel.id == currency_id)
+        await self._session.execute(query)
