@@ -8,9 +8,6 @@ from cryptocurrency_parser.application.currency.currency_gateway import (
     CurrencyAdder,
 )
 from cryptocurrency_parser.domain.models.currency.currency import Currency
-from cryptocurrency_parser.domain.services.currency.currency import (
-    CurrencyService,
-)
 
 
 @dataclass(frozen=True)
@@ -25,17 +22,17 @@ class AddCurrency(Interactor[NewCurrencyDTO, None]):
     def __init__(
         self,
         currency_db_gateway: CurrencyAdder,
-        currency_service: CurrencyService,
         transaction_manager: TransactionManager,
     ) -> None:
         self._currency_db_gateway = currency_db_gateway
-        self._currency_service = currency_service
         self._transaction_manager = transaction_manager
 
     async def __call__(self, data: NewCurrencyDTO) -> None:
-        new_currency: Currency = self._currency_service.create_currency(
-            full_name=data.full_name,
+        new_currency: Currency = Currency.create(
             ticker=data.ticker,
+            full_name=data.full_name,
+            max_supply=data.max_supply,
+            circulating_supply=data.circulating_supply,
         )
 
         await self._currency_db_gateway.save_currency(new_currency)
