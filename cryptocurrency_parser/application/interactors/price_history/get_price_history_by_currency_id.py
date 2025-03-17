@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 
 from cryptocurrency_parser.application.common.interactor import Interactor
+from cryptocurrency_parser.application.interactors.exceptions import (
+    CurrencyNotFoundError,
+)
 from cryptocurrency_parser.application.price_history.price_history_gateway import (
     PriceHistoryReader,
 )
@@ -35,4 +38,7 @@ class GetPriceHistoryByCurrencyId(
                 currency_id=data.currency_id,
             )
         )
+        if price_history is None:
+            raise CurrencyNotFoundError(entity_id=str(data.currency_id))
+
         return PriceHistoryResultDTO(currencies=price_history)
