@@ -19,7 +19,7 @@ class GetCurrencyDTO:
     currency_id: CurrencyId
 
 
-class RemoveCurrency(Interactor[GetCurrencyDTO, Currency]):
+class GetCurrency(Interactor[GetCurrencyDTO, Currency]):
     def __init__(
         self,
         currency_db_gateway: CurrencyReader,
