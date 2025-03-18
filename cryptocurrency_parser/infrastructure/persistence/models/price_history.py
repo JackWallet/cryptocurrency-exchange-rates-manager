@@ -25,7 +25,6 @@ class PriceHistoryModel(Base):
     volume_24h: Mapped[Decimal] = mapped_column(
         Numeric(precision=24, scale=16), nullable=False,
     )
-    max_supply: Mapped[int | None]
     circulating_supply: Mapped[int]
     percent_change_1h: Mapped[float] = mapped_column(nullable=False)
     percent_change_24h: Mapped[float] = mapped_column(nullable=False)
