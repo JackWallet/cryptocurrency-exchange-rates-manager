@@ -7,7 +7,7 @@
   - [x] Repository with crud methods for the DB
 - [ ] Dockerise with PosrgreSQL
 - [ ] Redis 
-
+- [ ] Rewrite declarative mapping to imperative one
 # ENV Variables you want to use:
 - POSTGRES_HOST
 - POSTGRES_PORT
