@@ -10,8 +10,8 @@ from cryptocurrency_parser.application.price_history.price_history_gateway impor
     PriceHistoryAdder,
 )
 from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.services.price_history.price_history import (
-    PriceHistoryService,
+from cryptocurrency_parser.domain.models.price_history.price_history import (
+    PriceHistory,
 )
 
 
@@ -37,21 +37,18 @@ class AddPriceHistory(Interactor[AddPriceHistoryDTO, None]):
     def __init__(
         self,
         price_history_db_gateway: PriceHistoryAdder,
-        price_history_service: PriceHistoryService,
         transaction_manager: TransactionManager,
     ) -> None:
         self._price_history_db_gateway = price_history_db_gateway
-        self._price_history_service = price_history_service
         self._transaction_manager = transaction_manager
 
     async def __call__(self, data: AddPriceHistoryDTO) -> None:
-        price_history = self._price_history_service.create_price_history(
+        price_history = PriceHistory.create(
             currency_id=data.currency_id,
             market_cap=data.market_cap,
             market_cap_dominance=data.market_cap_dominance,
             price=data.price,
             volume_24h=data.volume_24h,
-            max_supply=data.max_supply,
             circulating_supply=data.circulating_supply,
             percent_change_1h=data.percent_change_1h,
             percent_change_24h=data.percent_change_24h,
