@@ -13,9 +13,6 @@ from cryptocurrency_parser.domain.models.price_history.price_history import (
 from cryptocurrency_parser.domain.models.price_history.price_history_id import (
     PriceHistoryId,
 )
-from cryptocurrency_parser.infrastructure.persistence.models.currency import (
-    CurrencyModel,
-)
 from cryptocurrency_parser.infrastructure.persistence.models.price_history import (
     PriceHistoryModel,
 )
