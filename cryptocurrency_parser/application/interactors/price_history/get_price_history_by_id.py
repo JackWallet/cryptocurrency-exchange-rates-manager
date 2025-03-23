@@ -20,14 +20,24 @@ class GetPriceHistoryDTO:
     price_history_id: PriceHistoryId
 
 
-class GetPriceHistoryById(Interactor[GetPriceHistoryDTO, PriceHistory]):
+@dataclass(frozen=True)
+class PriceHistoryResultDTO:
+    price_history: PriceHistory
+
+
+class GetPriceHistoryById(
+    Interactor[GetPriceHistoryDTO, PriceHistoryResultDTO],
+):
     def __init__(
         self,
         price_history_db_gateway: PriceHistoryReader,
     ) -> None:
         self._price_history_db_gateway = price_history_db_gateway
 
-    async def __call__(self, data: GetPriceHistoryDTO) -> PriceHistory:
+    async def __call__(
+        self,
+        data: GetPriceHistoryDTO,
+    ) -> PriceHistoryResultDTO:
         price_history = await self._price_history_db_gateway.get_by_id(
             price_history_id=data.price_history_id,
         )
@@ -36,4 +46,4 @@ class GetPriceHistoryById(Interactor[GetPriceHistoryDTO, PriceHistory]):
                 entity_id=str(data.price_history_id),
             )
 
-        return price_history
+        return PriceHistoryResultDTO(price_history=price_history)
