@@ -13,6 +13,9 @@ from cryptocurrency_parser.entrypoints.ioc.repositories import (
     SQLAlchemyCurrencyRepositoryProvider,
     SQLAlchemyPriceHistoryRepositoryProvider,
 )
+from cryptocurrency_parser.entrypoints.ioc.transaction_manager import (
+    SQLAlchemyTransactionManagerProvider,
+)
 
 
 def get_providers() -> Iterable[Provider]:
@@ -22,4 +25,5 @@ def get_providers() -> Iterable[Provider]:
         CurrencyInteractorsProvider(),
         SQLAlchemyCurrencyRepositoryProvider(),
         SQLAlchemyPriceHistoryRepositoryProvider(),
+        SQLAlchemyTransactionManagerProvider(),
     )
