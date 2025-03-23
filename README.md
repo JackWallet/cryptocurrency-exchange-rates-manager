@@ -1,13 +1,16 @@
 # cryptocurrency-parser
 
 # TODO 
-- [ ] REST API for the wallet
+- [x] REST API for the wallet
   - [x] Price History of the coin in USD
   - [x] Alembic migrations
   - [x] Repository with crud methods for the DB
-- [ ] Dockerise with PostrgreSQL
-- [ ] Redis 
-- [ ] Rewrite declarative mapping to imperative one
+- [ ] Docker
+- [ ] Redis
+- [ ] Id Provider support for the authentification
+- [ ] Tests
+- [ ] Set up GitHub Actions support
+- [ ] Rewrite ORM declarative mapping to imperative one
 # ENV Variables you want to use:
 - POSTGRES_HOST
 - POSTGRES_PORT
