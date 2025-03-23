@@ -1,4 +1,4 @@
-from dishka import Provider, provide
+from dishka import Provider, Scope, provide
 
 from cryptocurrency_parser.application.common.transaction_manager import (
     TransactionManager,
@@ -9,6 +9,9 @@ from cryptocurrency_parser.infrastructure.database.transaction_manager import (
 
 
 class SQLAlchemyTransactionManagerProvider(Provider):
+    scope = Scope.REQUEST
+
     transaction_manager = provide(
-        SQLAlchemyTransactionManager, provides=TransactionManager,
+        SQLAlchemyTransactionManager,
+        provides=TransactionManager,
     )
