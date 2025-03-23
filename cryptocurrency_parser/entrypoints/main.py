@@ -1,0 +1,15 @@
+from dishka.integrations.fastapi import (
+    setup_dishka,
+)
+
+from cryptocurrency_parser.entrypoints.ioc.registry import get_providers
+from cryptocurrency_parser.entrypoints.ioc.setup import create_async_container
+from cryptocurrency_parser.entrypoints.setup import (
+    get_fastapi_app,
+)
+
+fastapi_app = get_fastapi_app()
+provider_registry = get_providers()
+dishka_container = create_async_container(providers=provider_registry)
+
+setup_dishka(container=dishka_container, app=fastapi_app)

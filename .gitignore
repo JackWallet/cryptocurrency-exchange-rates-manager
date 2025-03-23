@@ -169,3 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# VSCode config
+.vscode
+launch.json
+
+# MacOS dirty tricks
+.DS_Store
