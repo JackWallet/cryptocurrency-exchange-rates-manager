@@ -5,7 +5,7 @@
   - [x] Price History of the coin in USD
   - [x] Alembic migrations
   - [x] Repository with crud methods for the DB
-- [ ] Dockerise with PosrgreSQL
+- [ ] Dockerise with PostrgreSQL
 - [ ] Redis 
 - [ ] Rewrite declarative mapping to imperative one
 # ENV Variables you want to use:
