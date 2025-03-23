@@ -41,8 +41,8 @@ class PriceHistoryReader(Protocol):
     @abstractmethod
     async def get_last_record(
         self,
-        currency_ids: list[CurrencyId],
-    ) -> list[PriceHistory]:
+        currency_id: CurrencyId,
+    ) -> PriceHistory | None:
         raise NotImplementedError
 
 
