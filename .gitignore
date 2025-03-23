@@ -173,3 +173,6 @@ cython_debug/
 # VSCode config
 .vscode
 launch.json
+
+# MacOS dirty tricks
+.DS_Store
