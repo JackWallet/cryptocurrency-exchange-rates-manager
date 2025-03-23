@@ -9,7 +9,7 @@ from cryptocurrency_parser.infrastructure.database.database import (
 )
 
 
-class SQLAlchemyProvider(Provider):
+class SQLAlchemyDatabaseProvider(Provider):
     config = from_context(provides=Config, scope=Scope.APP)
 
     @provide(scope=Scope.APP)
