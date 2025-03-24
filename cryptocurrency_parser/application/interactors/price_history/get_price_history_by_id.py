@@ -16,17 +16,17 @@ from cryptocurrency_parser.domain.models.price_history.price_history_id import (
 
 
 @dataclass(frozen=True)
-class GetPriceHistoryDTO:
+class GetPriceHistoryByIdDTO:
     price_history_id: PriceHistoryId
 
 
 @dataclass(frozen=True)
-class PriceHistoryResultDTO:
+class GetPriceHistoryResultByIdDTO:
     price_history: PriceHistory
 
 
 class GetPriceHistoryById(
-    Interactor[GetPriceHistoryDTO, PriceHistoryResultDTO],
+    Interactor[GetPriceHistoryByIdDTO, GetPriceHistoryResultByIdDTO],
 ):
     def __init__(
         self,
@@ -36,8 +36,8 @@ class GetPriceHistoryById(
 
     async def __call__(
         self,
-        data: GetPriceHistoryDTO,
-    ) -> PriceHistoryResultDTO:
+        data: GetPriceHistoryByIdDTO,
+    ) -> GetPriceHistoryResultByIdDTO:
         price_history = await self._price_history_db_gateway.get_by_id(
             price_history_id=data.price_history_id,
         )
@@ -46,4 +46,4 @@ class GetPriceHistoryById(
                 entity_id=str(data.price_history_id),
             )
 
-        return PriceHistoryResultDTO(price_history=price_history)
+        return GetPriceHistoryResultByIdDTO(price_history=price_history)

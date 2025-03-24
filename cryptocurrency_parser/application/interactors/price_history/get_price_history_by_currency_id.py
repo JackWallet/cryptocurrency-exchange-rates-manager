@@ -19,12 +19,14 @@ class GetPriceHistoryByCurrencyIdDTO:
 
 
 @dataclass(frozen=True)
-class PriceHistoryResultDTO:
+class GetPriceHistoryByCurrencyIdResultDTO:
     currencies: list[PriceHistory]
 
 
 class GetPriceHistoryByCurrencyId(
-    Interactor[GetPriceHistoryByCurrencyIdDTO, PriceHistoryResultDTO],
+    Interactor[
+        GetPriceHistoryByCurrencyIdDTO, GetPriceHistoryByCurrencyIdResultDTO,
+    ],
 ):
     def __init__(self, price_history_db_gateway: PriceHistoryReader) -> None:
         self._price_history_db_gateway = price_history_db_gateway
@@ -32,7 +34,7 @@ class GetPriceHistoryByCurrencyId(
     async def __call__(
         self,
         data: GetPriceHistoryByCurrencyIdDTO,
-    ) -> PriceHistoryResultDTO:
+    ) -> GetPriceHistoryByCurrencyIdResultDTO:
         price_history = (
             await self._price_history_db_gateway.get_by_currency_id(
                 currency_id=data.currency_id,
@@ -41,4 +43,4 @@ class GetPriceHistoryByCurrencyId(
         if price_history is None:
             raise CurrencyNotFoundError(entity_id=str(data.currency_id))
 
-        return PriceHistoryResultDTO(currencies=price_history)
+        return GetPriceHistoryByCurrencyIdResultDTO(currencies=price_history)
