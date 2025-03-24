@@ -65,8 +65,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             .limit(1)
         )
         query_result = await self._session.execute(query)
-        price_history = query_result.scalar_one_or_none()
-        return price_history if price_history else None
+        return query_result.scalar_one_or_none()
 
     async def get_last_record(
         self, currency_id: CurrencyId,
