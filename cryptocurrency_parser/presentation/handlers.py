@@ -31,6 +31,6 @@ async def get_price_history(
     except PriceHistoryRecordNotFoundError as ex:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Item not found",
-            headers={"X-Error": str(ex)},
+            detail=str(ex),
+            headers={"X-Error": "Item not found"},
         ) from ex
