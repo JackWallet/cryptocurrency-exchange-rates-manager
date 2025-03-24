@@ -69,7 +69,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         return price_history if price_history else None
 
     async def get_last_record(
-        self, currency_id: CurrencyId
+        self, currency_id: CurrencyId,
     ) -> PriceHistory | None:
         query = (
             select(PriceHistory)
