@@ -1,4 +1,6 @@
 from collections.abc import AsyncGenerator
+from datetime import UTC, datetime
+from decimal import Decimal
 from typing import Any
 from unittest.mock import Mock
 
@@ -16,6 +18,13 @@ from cryptocurrency_parser.application.price_history.price_history_gateway impor
     PriceHistoryReader,
     PriceHistoryRemover,
 )
+from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from cryptocurrency_parser.domain.models.price_history.price_history import (
+    PriceHistory,
+)
+from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+    PriceHistoryId,
+)
 
 
 class MockGatewayProvider(Provider):
@@ -23,21 +32,15 @@ class MockGatewayProvider(Provider):
 
     @provide
     def provide_reader(self) -> PriceHistoryReader:
-        reader = Mock()
-        reader.execute = Mock(return_value=1)
-        return reader
+        return Mock()
 
     @provide
     def provide_adder(self) -> PriceHistoryAdder:
-        writer = Mock()
-        writer.execute = Mock(return_value=1)
-        return writer
+        return Mock()
 
     @provide
     def provide_remover(self) -> PriceHistoryRemover:
-        remover = Mock()
-        remover.execute = Mock(return_value=1)
-        return remover
+        return Mock()
 
 
 @pytest_asyncio.fixture(scope="package")
@@ -47,9 +50,40 @@ async def container() -> AsyncGenerator[AsyncContainer, None]:
     await container.close()
 
 
+@pytest_asyncio.fixture(scope="module")
+def mock_valid_price_history() -> PriceHistory:
+    return PriceHistory(
+        id=PriceHistoryId(1),
+        currency_id=CurrencyId(1),
+        updated_at=datetime.now(tz=UTC),
+        market_cap=Decimal(12),
+        circulating_supply=1,
+        market_cap_dominance=1,
+        percent_change_1h=1,
+        percent_change_24h=1,
+        percent_change_30d=1,
+        percent_change_60d=1,
+        percent_change_7d=1,
+        percent_change_90d=1,
+        price=Decimal(1),
+        volume_24h=Decimal(1),
+    )
+
+
 @pytest_asyncio.fixture(scope="package")
-async def reader(container: AsyncContainer) -> Any:  # noqa: ANN401
-    return await container.get(PriceHistoryReader)
+async def reader_valid(
+    container: AsyncContainer,
+    mock_valid_price_history: PriceHistory,
+) -> Any:  # noqa: ANN401
+    reader = await container.get(PriceHistoryReader)
+    reader.get_by_id = Mock(return_value=mock_valid_price_history)
+    reader.get_by_currency_id = Mock(return_value=[mock_valid_price_history])
+    reader.get_by_currency_ids = Mock(return_value=[mock_valid_price_history])
+    reader.get_highest_recorded_price_by_currency_id = Mock(
+        return_value=mock_valid_price_history,
+    )
+    reader.get_last_record = Mock(return_value=mock_valid_price_history)
+    return reader
 
 
 @pytest_asyncio.fixture(scope="package")
