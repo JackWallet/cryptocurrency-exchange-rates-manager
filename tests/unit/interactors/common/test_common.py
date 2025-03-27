@@ -12,6 +12,7 @@ from dishka import (
     make_async_container,
     provide,
 )
+from sqlalchemy.exc import SQLAlchemyError
 
 from cryptocurrency_parser.application.price_history.price_history_gateway import (
     PriceHistoryAdder,
@@ -100,10 +101,21 @@ async def reader_invalid(container: AsyncContainer) -> Any:  # noqa: ANN401
 
 
 @pytest_asyncio.fixture(scope="package")
-async def adder(container: AsyncContainer) -> Any:  # noqa: ANN401
-    return await container.get(PriceHistoryAdder)
+async def adder_valid(container: AsyncContainer) -> Any:  # noqa: ANN401
+    adder = await container.get(PriceHistoryAdder)
+    adder.add_price_history_record = Mock(return_value=None)
+    return adder
+
+
+@pytest_asyncio.fixture(scope="package")
+async def adder_error(container: AsyncContainer) -> Any:  # noqa: ANN401
+    adder = await container.get(PriceHistoryAdder)
+    adder.add_price_history_record = Mock(side_effect=SQLAlchemyError)
+    return adder
 
 
 @pytest_asyncio.fixture(scope="package")
 async def remover(container: AsyncContainer) -> Any:  # noqa: ANN401
-    return await container.get(PriceHistoryRemover)
+    remover = await container.get(PriceHistoryRemover)
+    remover.remove_price_history_record_by_id = Mock(return_value=None)
+    return remover
