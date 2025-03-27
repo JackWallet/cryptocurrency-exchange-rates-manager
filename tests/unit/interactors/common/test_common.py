@@ -115,7 +115,16 @@ async def adder_error(container: AsyncContainer) -> Any:  # noqa: ANN401
 
 
 @pytest_asyncio.fixture(scope="package")
-async def remover(container: AsyncContainer) -> Any:  # noqa: ANN401
+async def remover_valid(container: AsyncContainer) -> Any:  # noqa: ANN401
     remover = await container.get(PriceHistoryRemover)
     remover.remove_price_history_record_by_id = Mock(return_value=None)
+    return remover
+
+
+@pytest_asyncio.fixture(scope="package")
+async def remover_error(container: AsyncContainer) -> Any:  # noqa: ANN401
+    remover = await container.get(PriceHistoryRemover)
+    remover.remove_price_history_record_by_id = Mock(
+        side_effect=SQLAlchemyError,
+    )
     return remover
