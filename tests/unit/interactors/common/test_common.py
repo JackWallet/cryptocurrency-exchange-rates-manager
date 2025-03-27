@@ -87,6 +87,19 @@ async def reader_valid(
 
 
 @pytest_asyncio.fixture(scope="package")
+async def reader_invalid(container: AsyncContainer) -> Any:  # noqa: ANN401
+    reader = await container.get(PriceHistoryReader)
+    reader.get_by_id = Mock(return_value=None)
+    reader.get_by_currency_id = Mock(return_value=None)
+    reader.get_by_currency_ids = Mock(return_value=None)
+    reader.get_highest_recorded_price_by_currency_id = Mock(
+        return_value=None,
+    )
+    reader.get_last_record = Mock(return_value=None)
+    return reader
+
+
+@pytest_asyncio.fixture(scope="package")
 async def adder(container: AsyncContainer) -> Any:  # noqa: ANN401
     return await container.get(PriceHistoryAdder)
 
