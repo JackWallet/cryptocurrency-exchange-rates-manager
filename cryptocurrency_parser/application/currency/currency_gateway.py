@@ -7,7 +7,17 @@ from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
 
 class CurrencyReader(Protocol):
     @abstractmethod
-    async def get_currency_by_id(self, currency_id: CurrencyId) -> Currency | None:
+    async def get_currency_by_id(
+        self,
+        currency_id: CurrencyId,
+    ) -> Currency | None:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_currency_by_ticker(
+        self,
+        currency_ticker: str,
+    ) -> Currency | None:
         raise NotImplementedError
 
 
