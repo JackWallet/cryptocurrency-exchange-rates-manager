@@ -27,7 +27,10 @@ class SQLAlchemyCurrencyReader(CurrencyReader):
             last_updated=currency_model.last_updated,
         )
 
-    async def get_currency(self, currency_id: CurrencyId) -> Currency | None:
+    async def get_currency_by_id(
+        self,
+        currency_id: CurrencyId,
+    ) -> Currency | None:
         query = select(CurrencyModel).where(CurrencyModel.id == currency_id)
         result = await self._session.execute(query)
         currency = result.scalar_one_or_none()
