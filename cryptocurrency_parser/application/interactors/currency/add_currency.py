@@ -21,10 +21,10 @@ class NewCurrencyDTO:
 class AddCurrency(Interactor[NewCurrencyDTO, None]):
     def __init__(
         self,
-        currency_db_gateway: CurrencyAdder,
+        currency_adder: CurrencyAdder,
         transaction_manager: TransactionManager,
     ) -> None:
-        self._currency_db_gateway = currency_db_gateway
+        self._currency_adder = currency_adder
         self._transaction_manager = transaction_manager
 
     async def __call__(self, data: NewCurrencyDTO) -> None:
@@ -35,5 +35,5 @@ class AddCurrency(Interactor[NewCurrencyDTO, None]):
             circulating_supply=data.circulating_supply,
         )
 
-        await self._currency_db_gateway.save_currency(new_currency)
+        await self._currency_adder.save_currency(new_currency)
         await self._transaction_manager.commit()
