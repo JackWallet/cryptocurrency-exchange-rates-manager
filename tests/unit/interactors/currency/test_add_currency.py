@@ -52,5 +52,7 @@ async def test_add_currency_already_exists(
         circulating_supply=mock_currency.circulating_supply,
         full_name=mock_currency.full_name,
     )
-    with pytest.raises(CurrencyTickerAlreadyInDatabaseError()):
+    with pytest.raises(CurrencyTickerAlreadyInDatabaseError) as ex:
         await usecase(data=input_dto)
+
+    assert ex.value._ticker == mock_currency.ticker  # noqa: SLF001
