@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from cryptocurrency_parser.presentation.handlers import start_router
+from presentation.handlers import start_router
 
 
 @asynccontextmanager

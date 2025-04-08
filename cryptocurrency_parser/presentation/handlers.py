@@ -1,21 +1,21 @@
 from dishka.integrations.fastapi import FromDishka, inject
 from fastapi import APIRouter, HTTPException, status
 
-from cryptocurrency_parser.application.interactors.exceptions import (
+from application.interactors.exceptions import (
     PriceHistoryRecordNotFoundError,
 )
-from cryptocurrency_parser.application.interactors.price_history.get_price_history_by_currency_id import (
+from application.interactors.price_history.get_price_history_by_currency_id import (
     GetPriceHistoryByCurrencyId,
     GetPriceHistoryByCurrencyIdDTO,
     GetPriceHistoryByCurrencyIdResultDTO,
 )
-from cryptocurrency_parser.application.interactors.price_history.get_price_history_by_id import (
+from application.interactors.price_history.get_price_history_by_id import (
     GetPriceHistoryById,
     GetPriceHistoryByIdDTO,
     GetPriceHistoryResultByIdDTO,
 )
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history_id import (
     PriceHistoryId,
 )
 

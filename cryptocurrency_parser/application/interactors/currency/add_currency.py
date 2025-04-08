@@ -1,17 +1,18 @@
 from dataclasses import dataclass
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.common.transaction_manager import (
+from domain.models.currency.currency import Currency
+
+from application.common.interactor import Interactor
+from application.common.transaction_manager import (
     TransactionManager,
 )
-from cryptocurrency_parser.application.currency.currency_gateway import (
+from application.currency.currency_gateway import (
     CurrencyAdder,
     CurrencyReader,
 )
-from cryptocurrency_parser.application.currency.exceptions import (
+from application.currency.exceptions import (
     CurrencyTickerAlreadyInDatabaseError,
 )
-from cryptocurrency_parser.domain.models.currency.currency import Currency
 
 
 @dataclass(frozen=True)

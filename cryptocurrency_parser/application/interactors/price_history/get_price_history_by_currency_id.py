@@ -1,15 +1,16 @@
 from dataclasses import dataclass
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.interactors.exceptions import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
+    PriceHistory,
+)
+
+from application.common.interactor import Interactor
+from application.interactors.exceptions import (
     CurrencyNotFoundError,
 )
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
+from application.price_history.price_history_gateway import (
     PriceHistoryReader,
-)
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
-    PriceHistory,
 )
 
 

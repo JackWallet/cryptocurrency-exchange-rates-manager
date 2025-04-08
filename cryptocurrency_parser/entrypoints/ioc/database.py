@@ -3,9 +3,9 @@ from collections.abc import AsyncIterable
 from dishka import Provider, Scope, from_context, provide
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cryptocurrency_parser.application.common.database import Database
-from cryptocurrency_parser.entrypoints.config import Config
-from cryptocurrency_parser.infrastructure.database.database import (
+from application.common.database import Database
+from entrypoints.config import Config
+from infrastructure.database.database import (
     SQLAlchemyDatabase,
 )
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass

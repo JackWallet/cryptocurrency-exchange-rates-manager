@@ -1,7 +1,7 @@
 import os
 from dataclasses import dataclass
 
-from cryptocurrency_parser.entrypoints.exceptions import ConfigError
+from entrypoints.exceptions import ConfigError
 
 POSTGRES_HOST_ENV: str = "POSTGRES_HOST"
 POSTGRES_PORT_ENV: str = "POSTGRES_PORT"

@@ -1,11 +1,11 @@
 from abc import abstractmethod
 from typing import Protocol
 
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
     PriceHistory,
 )
-from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+from domain.models.price_history.price_history_id import (
     PriceHistoryId,
 )
 

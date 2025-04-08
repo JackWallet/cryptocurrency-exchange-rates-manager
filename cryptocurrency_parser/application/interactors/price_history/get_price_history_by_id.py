@@ -1,17 +1,18 @@
 from dataclasses import dataclass
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.interactors.exceptions import (
-    PriceHistoryRecordNotFoundError,
-)
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
-    PriceHistoryReader,
-)
-from cryptocurrency_parser.domain.models.price_history.price_history import (
+from domain.models.price_history.price_history import (
     PriceHistory,
 )
-from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+from domain.models.price_history.price_history_id import (
     PriceHistoryId,
+)
+
+from application.common.interactor import Interactor
+from application.interactors.exceptions import (
+    PriceHistoryRecordNotFoundError,
+)
+from application.price_history.price_history_gateway import (
+    PriceHistoryReader,
 )
 
 

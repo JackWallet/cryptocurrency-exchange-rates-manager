@@ -2,16 +2,17 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.common.transaction_manager import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
+    PriceHistory,
+)
+
+from application.common.interactor import Interactor
+from application.common.transaction_manager import (
     TransactionManager,
 )
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
+from application.price_history.price_history_gateway import (
     PriceHistoryAdder,
-)
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
-    PriceHistory,
 )
 
 

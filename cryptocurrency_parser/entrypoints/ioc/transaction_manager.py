@@ -1,9 +1,9 @@
 from dishka import Provider, Scope, provide
 
-from cryptocurrency_parser.application.common.transaction_manager import (
+from application.common.transaction_manager import (
     TransactionManager,
 )
-from cryptocurrency_parser.infrastructure.database.transaction_manager import (
+from infrastructure.database.transaction_manager import (
     SQLAlchemyTransactionManager,
 )
 

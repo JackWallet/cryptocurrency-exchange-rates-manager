@@ -1,21 +1,21 @@
 from dishka import Provider, Scope, provide
 
-from cryptocurrency_parser.application.currency.currency_gateway import (
+from application.currency.currency_gateway import (
     CurrencyAdder,
     CurrencyReader,
     CurrencyRemover,
 )
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
+from application.price_history.price_history_gateway import (
     PriceHistoryAdder,
     PriceHistoryReader,
     PriceHistoryRemover,
 )
-from cryptocurrency_parser.infrastructure.database.currency.currency_gateways import (
+from infrastructure.database.currency.currency_gateways import (
     SQLAlchemyCurrencyAdder,
     SQLAlchemyCurrencyReader,
     SQLAlchemyCurrencyRemover,
 )
-from cryptocurrency_parser.infrastructure.database.price_history.price_history_gateways import (
+from infrastructure.database.price_history.price_history_gateways import (
     SQLAlchemyPriceHistoryAdder,
     SQLAlchemyPriceHistoryReader,
     SQLAlchemyPriceHistoryRemover,
