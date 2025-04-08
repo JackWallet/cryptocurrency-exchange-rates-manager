@@ -3,8 +3,8 @@ from dishka import Provider, Scope, provide_all
 from application.interactors.currency.add_currency import (
     AddCurrency,
 )
-from application.interactors.currency.get_currency import (
-    GetCurrency,
+from application.interactors.currency.get_currency_by_id import (
+    GetCurrencyById,
 )
 from application.interactors.currency.remove_currency import (
     RemoveCurrency,
@@ -43,6 +43,6 @@ class CurrencyInteractorsProvider(Provider):
 
     interactors = provide_all(
         AddCurrency,
-        GetCurrency,
+        GetCurrencyById,
         RemoveCurrency,
     )

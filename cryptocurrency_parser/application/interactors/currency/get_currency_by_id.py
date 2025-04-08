@@ -15,16 +15,18 @@ from domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass(frozen=True)
-class GetCurrencyDTO:
+class GetCurrencyByIdDTO:
     currency_id: CurrencyId
 
 
 @dataclass(frozen=True)
-class GetCurrencyResultDTO:
+class GetCurrencyByIdResultDTO:
     currency: Currency
 
 
-class GetCurrency(Interactor[GetCurrencyDTO, GetCurrencyResultDTO]):
+class GetCurrencyById(
+    Interactor[GetCurrencyByIdDTO, GetCurrencyByIdResultDTO],
+):
     def __init__(
         self,
         currency_reader: CurrencyReader,
@@ -33,10 +35,13 @@ class GetCurrency(Interactor[GetCurrencyDTO, GetCurrencyResultDTO]):
         self._currency_reader = currency_reader
         self._transaction_manager = transaction_manager
 
-    async def __call__(self, data: GetCurrencyDTO) -> GetCurrencyResultDTO:
+    async def __call__(
+        self,
+        data: GetCurrencyByIdDTO,
+    ) -> GetCurrencyByIdResultDTO:
         currency = await self._currency_reader.get_currency_by_id(
             currency_id=data.currency_id,
         )
         if currency is None:
             raise CurrencyNotFoundError(entity_id=str(data.currency_id))
-        return GetCurrencyResultDTO(currency=currency)
+        return GetCurrencyByIdResultDTO(currency=currency)

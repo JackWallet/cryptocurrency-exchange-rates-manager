@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from domain.models.currency.currency import Currency
-
 from application.common.interactor import Interactor
 from application.common.transaction_manager import (
     TransactionManager,
@@ -13,6 +11,7 @@ from application.currency.currency_gateway import (
 from application.currency.exceptions import (
     CurrencyTickerAlreadyInDatabaseError,
 )
+from domain.models.currency.currency import Currency
 
 
 @dataclass(frozen=True)
