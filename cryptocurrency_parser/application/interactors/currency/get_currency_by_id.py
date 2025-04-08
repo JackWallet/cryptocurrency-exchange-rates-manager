@@ -1,9 +1,6 @@
 from dataclasses import dataclass
 
 from application.common.interactor import Interactor
-from application.common.transaction_manager import (
-    TransactionManager,
-)
 from application.currency.currency_gateway import (
     CurrencyReader,
 )
@@ -28,10 +25,8 @@ class GetCurrencyById(
     def __init__(
         self,
         currency_reader: CurrencyReader,
-        transaction_manager: TransactionManager,
     ) -> None:
         self._currency_reader = currency_reader
-        self._transaction_manager = transaction_manager
 
     async def __call__(
         self,
