@@ -16,21 +16,36 @@ from cryptocurrency_parser.domain.models.price_history.price_history_id import (
 
 
 @pytest_asyncio.fixture
-async def reader() -> AsyncMock:
-    return AsyncMock()
+async def reader_not_found() -> AsyncMock:
+    reader = AsyncMock()
+    reader.get_currency_by_id = AsyncMock(return_type=None)
+    reader.get_currency_by_ticker = AsyncMock(return_type=None)
+    return reader
+
+
+@pytest_asyncio.fixture
+async def reader_found(mock_currency: Currency) -> AsyncMock:
+    reader = AsyncMock()
+    reader.get_currency_by_id = AsyncMock(return_type=mock_currency)
+    reader.get_currency_by_ticker = AsyncMock(return_type=mock_currency)
+    return reader
 
 
 @pytest_asyncio.fixture
 async def adder() -> AsyncMock:
-    return AsyncMock()
+    adder = AsyncMock()
+    adder.save_currency = AsyncMock(return_type=None)
+    return adder
 
 
 @pytest_asyncio.fixture
 async def remover() -> AsyncMock:
-    return AsyncMock()
+    remover = AsyncMock()
+    remover.remove_currency = AsyncMock(return_type=None)
+    return remover
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def mock_currency() -> Currency:
     return Currency(
         id=CurrencyId(1221),
