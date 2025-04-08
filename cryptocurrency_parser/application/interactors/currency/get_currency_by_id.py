@@ -41,5 +41,5 @@ class GetCurrencyById(
             currency_id=data.currency_id,
         )
         if currency is None:
-            raise CurrencyNotFoundByIdError(entity_id=str(data.currency_id))
+            raise CurrencyNotFoundByIdError(identifier=str(data.currency_id))
         return GetCurrencyByIdResultDTO(currency=currency)
