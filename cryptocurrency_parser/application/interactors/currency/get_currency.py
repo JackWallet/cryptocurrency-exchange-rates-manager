@@ -19,7 +19,12 @@ class GetCurrencyDTO:
     currency_id: CurrencyId
 
 
-class GetCurrency(Interactor[GetCurrencyDTO, Currency]):
+@dataclass(frozen=True)
+class GetCurrencyResultDTO:
+    currency: Currency
+
+
+class GetCurrency(Interactor[GetCurrencyDTO, GetCurrencyResultDTO]):
     def __init__(
         self,
         currency_reader: CurrencyReader,
@@ -28,10 +33,10 @@ class GetCurrency(Interactor[GetCurrencyDTO, Currency]):
         self._currency_reader = currency_reader
         self._transaction_manager = transaction_manager
 
-    async def __call__(self, data: GetCurrencyDTO) -> Currency:
+    async def __call__(self, data: GetCurrencyDTO) -> GetCurrencyResultDTO:
         currency = await self._currency_reader.get_currency_by_id(
             currency_id=data.currency_id,
         )
         if currency is None:
             raise CurrencyNotFoundError(entity_id=str(data.currency_id))
-        return currency
+        return GetCurrencyResultDTO(currency=currency)
