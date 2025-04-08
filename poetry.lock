@@ -2152,6 +2152,18 @@ shellingham = ">=1.3.0"
 typing-extensions = ">=3.7.4.3"
 
 [[package]]
+name = "types-pytest-lazy-fixture"
+version = "0.6.3.20240707"
+description = "Typing stubs for pytest-lazy-fixture"
+optional = false
+python-versions = ">=3.8"
+groups = ["test"]
+files = [
+    {file = "types-pytest-lazy-fixture-0.6.3.20240707.tar.gz", hash = "sha256:c6d93433977081bbb6b38bc521d4429113b23e7b14575db9e3948237e6691962"},
+    {file = "types_pytest_lazy_fixture-0.6.3.20240707-py3-none-any.whl", hash = "sha256:b0493cb5ad3ff0fbd8ce0d83c07aa867d0770bba5c6c87a09eac0ad8ef86700d"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -2505,4 +2517,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11"
-content-hash = "a1873da490961d5420db9817acd59f466c8720f29c4af41f08b19b0fc357161e"
+content-hash = "0fbc3701d0d652adae320b99e6d716c3ed9cbefbf8ca2e51970ea4bbfd05984a"
