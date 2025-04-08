@@ -50,30 +50,30 @@ def mock_price_history() -> PriceHistory:
 @pytest_asyncio.fixture
 async def reader_not_found() -> AsyncMock:
     reader = AsyncMock()
-    reader.get_currency_by_id = AsyncMock(return_type=None)
-    reader.get_currency_by_ticker = AsyncMock(return_type=None)
+    reader.get_currency_by_id = AsyncMock(return_value=None)
+    reader.get_currency_by_ticker = AsyncMock(return_value=None)
     return reader
 
 
 @pytest_asyncio.fixture
 async def reader_found(mock_currency: Currency) -> AsyncMock:
     reader = AsyncMock()
-    reader.get_currency_by_id = AsyncMock(return_type=mock_currency)
-    reader.get_currency_by_ticker = AsyncMock(return_type=mock_currency)
+    reader.get_currency_by_id = AsyncMock(return_value=mock_currency)
+    reader.get_currency_by_ticker = AsyncMock(return_value=mock_currency)
     return reader
 
 
 @pytest_asyncio.fixture
 async def adder() -> AsyncMock:
     adder = AsyncMock()
-    adder.save_currency = AsyncMock(return_type=None)
+    adder.save_currency = AsyncMock(return_value=None)
     return adder
 
 
 @pytest_asyncio.fixture
 async def remover() -> AsyncMock:
     remover = AsyncMock()
-    remover.remove_currency = AsyncMock(return_type=None)
+    remover.remove_currency = AsyncMock(return_value=None)
     return remover
 
 
