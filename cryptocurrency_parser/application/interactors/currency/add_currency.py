@@ -15,14 +15,14 @@ from cryptocurrency_parser.domain.models.currency.currency import Currency
 
 
 @dataclass(frozen=True)
-class NewCurrencyDTO:
+class AddCurrencyDTO:
     ticker: str
     full_name: str
     max_supply: int | None
     circulating_supply: int
 
 
-class AddCurrency(Interactor[NewCurrencyDTO, None]):
+class AddCurrency(Interactor[AddCurrencyDTO, None]):
     def __init__(
         self,
         currency_reader: CurrencyReader,
@@ -33,7 +33,7 @@ class AddCurrency(Interactor[NewCurrencyDTO, None]):
         self._transaction_manager = transaction_manager
         self._currency_reader = currency_reader
 
-    async def __call__(self, data: NewCurrencyDTO) -> None:
+    async def __call__(self, data: AddCurrencyDTO) -> None:
         if (
             await self._currency_reader.get_currency_by_ticker(
                 currency_ticker=data.ticker,
