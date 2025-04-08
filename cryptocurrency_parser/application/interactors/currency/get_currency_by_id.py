@@ -7,9 +7,7 @@ from application.common.transaction_manager import (
 from application.currency.currency_gateway import (
     CurrencyReader,
 )
-from application.interactors.exceptions import (
-    CurrencyNotFoundError,
-)
+from application.currency.exceptions import CurrencyNotFoundByIdError
 from domain.models.currency.currency import Currency
 from domain.models.currency.currency_id import CurrencyId
 
@@ -43,5 +41,5 @@ class GetCurrencyById(
             currency_id=data.currency_id,
         )
         if currency is None:
-            raise CurrencyNotFoundError(entity_id=str(data.currency_id))
+            raise CurrencyNotFoundByIdError(entity_id=str(data.currency_id))
         return GetCurrencyByIdResultDTO(currency=currency)
