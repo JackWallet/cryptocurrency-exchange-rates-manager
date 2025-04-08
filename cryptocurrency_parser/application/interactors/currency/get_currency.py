@@ -29,7 +29,7 @@ class GetCurrency(Interactor[GetCurrencyDTO, Currency]):
         self._transaction_manager = transaction_manager
 
     async def __call__(self, data: GetCurrencyDTO) -> Currency:
-        currency = await self._currency_db_gateway.get_currency(
+        currency = await self._currency_db_gateway.get_currency_by_id(
             currency_id=data.currency_id,
         )
         if currency is None:
