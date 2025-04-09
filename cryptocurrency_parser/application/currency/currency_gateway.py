@@ -29,5 +29,5 @@ class CurrencyAdder(Protocol):
 
 class CurrencyRemover(Protocol):
     @abstractmethod
-    async def remove_currency(self, currency_id: CurrencyId) -> None:
+    async def remove_currency_by_id(self, currency_id: CurrencyId) -> None:
         raise NotImplementedError

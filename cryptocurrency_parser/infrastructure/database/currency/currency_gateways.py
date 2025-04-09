@@ -81,6 +81,6 @@ class SQLAlchemyCurrencyRemover(CurrencyRemover):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def remove_currency(self, currency_id: CurrencyId) -> None:
+    async def remove_currency_by_id(self, currency_id: CurrencyId) -> None:
         query = delete(CurrencyModel).where(CurrencyModel.id == currency_id)
         await self._session.execute(query)

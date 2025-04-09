@@ -25,7 +25,7 @@ class RemoveCurrency(Interactor[RemoveCurrencyDTO, None]):
         self._transaction_manager = transaction_manager
 
     async def __call__(self, data: RemoveCurrencyDTO) -> None:
-        await self._currency_remover.remove_currency(
+        await self._currency_remover.remove_currency_by_id(
             currency_id=data.currency_id,
         )
         await self._transaction_manager.commit()
