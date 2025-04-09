@@ -38,6 +38,6 @@ class GetCurrencyByTicker(
         )
         if currency is None:
             raise CurrencyNotFoundByTickerError(
-                identifier=str(data.currency_id),
+                identifier=str(data.currency_ticker),
             )
         return GetCurrencyByTickerResultDTO(currency=currency)
