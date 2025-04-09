@@ -23,7 +23,6 @@ class AddPriceHistoryDTO:
     market_cap_dominance: float
     price: Decimal
     volume_24h: Decimal
-    max_supply: int | None
     circulating_supply: int
     percent_change_1h: float
     percent_change_24h: float
