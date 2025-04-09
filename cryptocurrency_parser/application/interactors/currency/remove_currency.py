@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from domain.models.currency.currency_id import CurrencyId
-
 from application.common.interactor import Interactor
 from application.common.transaction_manager import (
     TransactionManager,
@@ -9,6 +7,7 @@ from application.common.transaction_manager import (
 from application.currency.currency_gateway import (
     CurrencyRemover,
 )
+from domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass(frozen=True)
