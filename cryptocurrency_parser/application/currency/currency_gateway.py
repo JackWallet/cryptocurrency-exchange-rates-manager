@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from typing import Protocol
 
-from cryptocurrency_parser.domain.models.currency.currency import Currency
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from domain.models.currency.currency import Currency
+from domain.models.currency.currency_id import CurrencyId
 
 
 class CurrencyReader(Protocol):
@@ -30,4 +30,8 @@ class CurrencyAdder(Protocol):
 class CurrencyRemover(Protocol):
     @abstractmethod
     async def remove_currency_by_id(self, currency_id: CurrencyId) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    async def remove_currency_by_ticker(self, currency_ticker: str) -> None:
         raise NotImplementedError
