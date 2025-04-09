@@ -30,15 +30,15 @@ class GetPriceHistoryById(
 ):
     def __init__(
         self,
-        price_history_db_gateway: PriceHistoryReader,
+        price_history_reader: PriceHistoryReader,
     ) -> None:
-        self._price_history_db_gateway = price_history_db_gateway
+        self._price_history_reader = price_history_reader
 
     async def __call__(
         self,
         data: GetPriceHistoryByIdDTO,
     ) -> GetPriceHistoryResultByIdDTO:
-        price_history = await self._price_history_db_gateway.get_price_history_by_id(
+        price_history = await self._price_history_reader.get_price_history_by_id(
             price_history_id=data.price_history_id,
         )
         if price_history is None:
