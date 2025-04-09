@@ -76,10 +76,10 @@ async def reader_found(
     )
     reader.get_price_history_by_id = AsyncMock(return_value=mock_price_history)
     reader.get_price_history_by_currency_id = AsyncMock(
-        return_value=mock_price_history,
+        return_value=[mock_price_history],
     )
     reader.get_price_history_by_currency_ids = AsyncMock(
-        return_value=mock_price_history,
+        return_value=[mock_price_history],
     )
     reader.get_last_record_by_currency_id = AsyncMock(
         return_value=mock_price_history,
