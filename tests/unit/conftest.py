@@ -52,14 +52,39 @@ async def reader_not_found() -> AsyncMock:
     reader = AsyncMock()
     reader.get_currency_by_id = AsyncMock(return_value=None)
     reader.get_currency_by_ticker = AsyncMock(return_value=None)
+    reader.get_highest_recorded_price_by_currency_id = AsyncMock(
+        return_value=None,
+    )
+    reader.get_price_history_by_id = AsyncMock(return_value=None)
+    reader.get_price_history_by_currency_id = AsyncMock(return_value=None)
+    reader.get_price_history_by_currency_ids = AsyncMock(return_value=None)
+    reader.get_last_record_by_currency_id = AsyncMock(return_value=None)
+
     return reader
 
 
 @pytest_asyncio.fixture
-async def reader_found(mock_currency: Currency) -> AsyncMock:
+async def reader_found(
+    mock_currency: Currency,
+    mock_price_history: PriceHistory,
+) -> AsyncMock:
     reader = AsyncMock()
     reader.get_currency_by_id = AsyncMock(return_value=mock_currency)
     reader.get_currency_by_ticker = AsyncMock(return_value=mock_currency)
+    reader.get_highest_recorded_price_by_currency_id = AsyncMock(
+        return_value=mock_price_history,
+    )
+    reader.get_price_history_by_id = AsyncMock(return_value=mock_price_history)
+    reader.get_price_history_by_currency_id = AsyncMock(
+        return_value=mock_price_history,
+    )
+    reader.get_price_history_by_currency_ids = AsyncMock(
+        return_value=mock_price_history,
+    )
+    reader.get_last_record_by_currency_id = AsyncMock(
+        return_value=mock_price_history,
+    )
+
     return reader
 
 
@@ -67,13 +92,16 @@ async def reader_found(mock_currency: Currency) -> AsyncMock:
 async def adder() -> AsyncMock:
     adder = AsyncMock()
     adder.save_currency = AsyncMock(return_value=None)
+    adder.add_price_history_record = AsyncMock(return_value=None)
     return adder
 
 
 @pytest_asyncio.fixture
 async def remover() -> AsyncMock:
     remover = AsyncMock()
-    remover.remove_currency = AsyncMock(return_value=None)
+    remover.remove_currency_by_id = AsyncMock(return_value=None)
+    remover.remove_currency_by_ticker = AsyncMock(return_value=None)
+    remover.remove_price_history_record_by_id = AsyncMock(return_value=None)
     return remover
 
 
