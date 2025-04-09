@@ -15,7 +15,7 @@ from domain.models.price_history.price_history_id import (
 )
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def mock_currency() -> Currency:
     return Currency(
         id=CurrencyId(1221),
@@ -27,7 +27,7 @@ def mock_currency() -> Currency:
     )
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def mock_price_history() -> PriceHistory:
     return PriceHistory(
         id=PriceHistoryId(123),
