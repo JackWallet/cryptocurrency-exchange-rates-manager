@@ -43,7 +43,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             percent_change_90d=price_history_model.percent_change_90d,
         )
 
-    async def get_by_id(
+    async def get_price_history_by_id(
         self,
         price_history_id: PriceHistoryId,
     ) -> PriceHistory | None:
@@ -58,13 +58,13 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             else None
         )
 
-    async def get_by_currency_id(
+    async def get_price_history_by_currency_id(
         self,
         currency_id: CurrencyId,
     ) -> list[PriceHistory] | None:
         query = select(PriceHistoryModel).where(
             PriceHistoryModel.currency_id == currency_id,
-        )
+        ).limit(10)
         query_result = await self._session.execute(query)
         price_history = query_result.scalars()
         return (
@@ -73,7 +73,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             else None
         )
 
-    async def get_by_currency_ids(
+    async def get_price_history_by_currency_ids(
         self,
         currency_ids: list[CurrencyId],
     ) -> list[PriceHistory] | None:
@@ -106,7 +106,7 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
             else None
         )
 
-    async def get_last_record(
+    async def get_last_record_by_currency_id(
         self,
         currency_id: CurrencyId,
     ) -> PriceHistory | None:

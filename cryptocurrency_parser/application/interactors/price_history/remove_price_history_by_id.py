@@ -28,7 +28,7 @@ class RemovePriceHistoryById(Interactor[RemovePriceHistoryByIdDTO, None]):
         self._price_history_reader = price_history_reader
 
     async def __call__(self, data: RemovePriceHistoryByIdDTO) -> None:
-        if not await self._price_history_reader.get_by_id(
+        if not await self._price_history_reader.get_price_history_by_id(
             data.price_history_id,
         ):
             raise PriceHistoryRecordNotFoundError(

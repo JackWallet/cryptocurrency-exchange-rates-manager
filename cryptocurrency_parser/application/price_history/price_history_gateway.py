@@ -12,20 +12,20 @@ from domain.models.price_history.price_history_id import (
 
 class PriceHistoryReader(Protocol):
     @abstractmethod
-    async def get_by_id(
+    async def get_price_history_by_id(
         self, price_history_id: PriceHistoryId,
     ) -> PriceHistory | None:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_currency_id(
+    async def get_price_history_by_currency_id(
         self,
         currency_id: CurrencyId,
     ) -> list[PriceHistory] | None:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_currency_ids(
+    async def get_price_history_by_currency_ids(
         self,
         currency_ids: list[CurrencyId],
     ) -> list[PriceHistory] | None:
@@ -39,7 +39,7 @@ class PriceHistoryReader(Protocol):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_last_record(
+    async def get_last_record_by_currency_id(
         self,
         currency_id: CurrencyId,
     ) -> PriceHistory | None:
