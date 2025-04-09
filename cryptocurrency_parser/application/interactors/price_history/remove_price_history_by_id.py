@@ -1,9 +1,5 @@
 from dataclasses import dataclass
 
-from domain.models.price_history.price_history_id import (
-    PriceHistoryId,
-)
-
 from application.common.interactor import Interactor
 from application.interactors.exceptions import (
     PriceHistoryRecordNotFoundError,
@@ -11,6 +7,9 @@ from application.interactors.exceptions import (
 from application.price_history.price_history_gateway import (
     PriceHistoryReader,
     PriceHistoryRemover,
+)
+from domain.models.price_history.price_history_id import (
+    PriceHistoryId,
 )
 
 
