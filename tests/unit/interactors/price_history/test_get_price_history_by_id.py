@@ -11,7 +11,7 @@ from domain.models.price_history.price_history import PriceHistory
 
 
 @pytest.mark.asyncio
-async def test_test_get_price_history_by_id_exists(
+async def test_get_price_history_by_id_exists(
     reader_found: AsyncMock,
     mock_price_history: PriceHistory,
 ) -> None:
@@ -26,7 +26,7 @@ async def test_test_get_price_history_by_id_exists(
 
 
 @pytest.mark.asyncio
-async def test_test_get_price_history_by_id_does_not_exist(
+async def test_get_price_history_by_id_does_not_exist(
     reader_not_found: AsyncMock,
     mock_price_history: PriceHistory,
 ) -> None:
