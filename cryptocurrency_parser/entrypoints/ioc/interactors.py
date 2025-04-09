@@ -6,8 +6,8 @@ from application.interactors.currency.add_currency import (
 from application.interactors.currency.get_currency_by_id import (
     GetCurrencyById,
 )
-from application.interactors.currency.remove_currency import (
-    RemoveCurrency,
+from application.interactors.currency.remove_currency_by_id import (
+    RemoveCurrencyById,
 )
 from application.interactors.price_history.add_price_history import (
     AddPriceHistory,
@@ -44,5 +44,5 @@ class CurrencyInteractorsProvider(Provider):
     interactors = provide_all(
         AddCurrency,
         GetCurrencyById,
-        RemoveCurrency,
+        RemoveCurrencyById,
     )

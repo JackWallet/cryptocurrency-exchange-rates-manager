@@ -11,11 +11,11 @@ from domain.models.currency.currency_id import CurrencyId
 
 
 @dataclass(frozen=True)
-class RemoveCurrencyDTO:
+class RemoveCurrencyByIdDTO:
     currency_id: CurrencyId
 
 
-class RemoveCurrency(Interactor[RemoveCurrencyDTO, None]):
+class RemoveCurrencyById(Interactor[RemoveCurrencyByIdDTO, None]):
     def __init__(
         self,
         currency_remover: CurrencyRemover,
@@ -24,7 +24,7 @@ class RemoveCurrency(Interactor[RemoveCurrencyDTO, None]):
         self._currency_remover = currency_remover
         self._transaction_manager = transaction_manager
 
-    async def __call__(self, data: RemoveCurrencyDTO) -> None:
+    async def __call__(self, data: RemoveCurrencyByIdDTO) -> None:
         await self._currency_remover.remove_currency_by_id(
             currency_id=data.currency_id,
         )
