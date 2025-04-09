@@ -28,14 +28,14 @@ class GetHighestRecordedPrice(
 ):
     def __init__(
         self,
-        price_history_db_gateway: PriceHistoryReader,
+        price_history_reader: PriceHistoryReader,
     ) -> None:
-        self._price_history_db_gateway = price_history_db_gateway
+        self._price_history_reader = price_history_reader
 
     async def __call__(
         self, data: GetHighestRecordedPriceDTO,
     ) -> GetHighestRecordedPriceResultDTO:
-        price_history = await self._price_history_db_gateway.get_highest_recorded_price_by_currency_id(
+        price_history = await self._price_history_reader.get_highest_recorded_price_by_currency_id(
             currency_id=data.currency_id,
         )
 
