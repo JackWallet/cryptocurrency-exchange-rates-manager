@@ -1,16 +1,15 @@
 from dataclasses import dataclass
 
-from domain.models.currency.currency_id import CurrencyId
-from domain.models.price_history.price_history import (
-    PriceHistory,
-)
-
 from application.common.interactor import Interactor
 from application.interactors.exceptions import (
     PriceHistoryRecordNotFoundError,
 )
 from application.price_history.price_history_gateway import (
     PriceHistoryReader,
+)
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
+    PriceHistory,
 )
 
 
