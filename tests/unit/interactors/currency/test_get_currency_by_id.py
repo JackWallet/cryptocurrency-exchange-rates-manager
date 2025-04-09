@@ -15,11 +15,9 @@ from domain.models.currency.currency import Currency
 async def test_get_currency_by_id_exists(
     reader_found: AsyncMock,
     mock_currency: Currency,
-    transaction_manager: AsyncMock,
 ) -> None:
     usecase: GetCurrencyById = GetCurrencyById(
         currency_reader=reader_found,
-        transaction_manager=transaction_manager,
     )
     input_dto: GetCurrencyByIdDTO = GetCurrencyByIdDTO(
         currency_id=mock_currency.id,
@@ -34,11 +32,9 @@ async def test_get_currency_by_id_exists(
 async def test_get_currency_by_id_does_not_exist(
     reader_not_found: AsyncMock,
     mock_currency: Currency,
-    transaction_manager: AsyncMock,
 ) -> None:
     usecase: GetCurrencyById = GetCurrencyById(
         currency_reader=reader_not_found,
-        transaction_manager=transaction_manager,
     )
     input_dto: GetCurrencyByIdDTO = GetCurrencyByIdDTO(
         currency_id=mock_currency.id,
