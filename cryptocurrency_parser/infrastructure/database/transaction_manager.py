@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cryptocurrency_parser.application.common.transaction_manager import (
+from application.common.transaction_manager import (
     TransactionManager,
 )
 

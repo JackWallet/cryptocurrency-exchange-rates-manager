@@ -1,14 +1,12 @@
 from dataclasses import dataclass
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.interactors.exceptions import (
-    CurrencyNotFoundError,
-)
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
+from application.common.interactor import Interactor
+from application.currency.exceptions import CurrencyNotFoundByIdError
+from application.price_history.price_history_gateway import (
     PriceHistoryReader,
 )
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
     PriceHistory,
 )
 
@@ -19,26 +17,29 @@ class GetPriceHistoryByCurrencyIdDTO:
 
 
 @dataclass(frozen=True)
-class PriceHistoryResultDTO:
+class GetPriceHistoryByCurrencyIdResultDTO:
     currencies: list[PriceHistory]
 
 
 class GetPriceHistoryByCurrencyId(
-    Interactor[GetPriceHistoryByCurrencyIdDTO, PriceHistoryResultDTO],
+    Interactor[
+        GetPriceHistoryByCurrencyIdDTO,
+        GetPriceHistoryByCurrencyIdResultDTO,
+    ],
 ):
-    def __init__(self, price_history_db_gateway: PriceHistoryReader) -> None:
-        self._price_history_db_gateway = price_history_db_gateway
+    def __init__(self, price_history_reader: PriceHistoryReader) -> None:
+        self._price_history_reader = price_history_reader
 
     async def __call__(
         self,
         data: GetPriceHistoryByCurrencyIdDTO,
-    ) -> PriceHistoryResultDTO:
+    ) -> GetPriceHistoryByCurrencyIdResultDTO:
         price_history = (
-            await self._price_history_db_gateway.get_by_currency_id(
+            await self._price_history_reader.get_price_history_by_currency_id(
                 currency_id=data.currency_id,
             )
         )
         if price_history is None:
-            raise CurrencyNotFoundError(entity_id=str(data.currency_id))
+            raise CurrencyNotFoundByIdError(identifier=str(data.currency_id))
 
-        return PriceHistoryResultDTO(currencies=price_history)
+        return GetPriceHistoryByCurrencyIdResultDTO(currencies=price_history)

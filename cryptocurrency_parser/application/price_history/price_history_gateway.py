@@ -1,31 +1,31 @@
 from abc import abstractmethod
 from typing import Protocol
 
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
     PriceHistory,
 )
-from cryptocurrency_parser.domain.models.price_history.price_history_id import (
+from domain.models.price_history.price_history_id import (
     PriceHistoryId,
 )
 
 
 class PriceHistoryReader(Protocol):
     @abstractmethod
-    async def get_by_id(
+    async def get_price_history_by_id(
         self, price_history_id: PriceHistoryId,
     ) -> PriceHistory | None:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_currency_id(
+    async def get_price_history_by_currency_id(
         self,
         currency_id: CurrencyId,
     ) -> list[PriceHistory] | None:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_currency_ids(
+    async def get_price_history_by_currency_ids(
         self,
         currency_ids: list[CurrencyId],
     ) -> list[PriceHistory] | None:
@@ -39,10 +39,10 @@ class PriceHistoryReader(Protocol):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_last_record(
+    async def get_last_record_by_currency_id(
         self,
-        currency_ids: list[CurrencyId],
-    ) -> list[PriceHistory]:
+        currency_id: CurrencyId,
+    ) -> PriceHistory | None:
         raise NotImplementedError
 
 

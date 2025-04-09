@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 
-from cryptocurrency_parser.application.common.interactor import Interactor
-from cryptocurrency_parser.application.interactors.exceptions import (
+from application.common.interactor import Interactor
+from application.interactors.exceptions import (
     PriceHistoryRecordNotFoundError,
 )
-from cryptocurrency_parser.application.price_history.price_history_gateway import (
+from application.price_history.price_history_gateway import (
     PriceHistoryReader,
 )
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.domain.models.price_history.price_history import (
+from domain.models.currency.currency_id import CurrencyId
+from domain.models.price_history.price_history import (
     PriceHistory,
 )
 
@@ -18,17 +18,24 @@ class GetHighestRecordedPriceDTO:
     currency_id: CurrencyId
 
 
+@dataclass(frozen=True)
+class GetHighestRecordedPriceResultDTO:
+    price_history: PriceHistory
+
+
 class GetHighestRecordedPrice(
-    Interactor[GetHighestRecordedPriceDTO, PriceHistory],
+    Interactor[GetHighestRecordedPriceDTO, GetHighestRecordedPriceResultDTO],
 ):
     def __init__(
         self,
-        price_history_db_gateway: PriceHistoryReader,
+        price_history_reader: PriceHistoryReader,
     ) -> None:
-        self._price_history_db_gateway = price_history_db_gateway
+        self._price_history_reader = price_history_reader
 
-    async def __call__(self, data: GetHighestRecordedPriceDTO) -> PriceHistory:
-        price_history = await self._price_history_db_gateway.get_highest_recorded_price_by_currency_id(
+    async def __call__(
+        self, data: GetHighestRecordedPriceDTO,
+    ) -> GetHighestRecordedPriceResultDTO:
+        price_history = await self._price_history_reader.get_highest_recorded_price_by_currency_id(
             currency_id=data.currency_id,
         )
 
@@ -36,4 +43,4 @@ class GetHighestRecordedPrice(
             raise PriceHistoryRecordNotFoundError(
                 entity_id=str(data.currency_id),
             )
-        return price_history
+        return GetHighestRecordedPriceResultDTO(price_history=price_history)

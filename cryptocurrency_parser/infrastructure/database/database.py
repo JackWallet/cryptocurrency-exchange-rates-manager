@@ -8,8 +8,8 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from cryptocurrency_parser.application.common.database import Database
-from cryptocurrency_parser.entrypoints.config import PostgresConfig
+from application.common.database import Database
+from entrypoints.config import PostgresConfig
 
 
 class SQLAlchemyDatabase(Database[AsyncSession]):

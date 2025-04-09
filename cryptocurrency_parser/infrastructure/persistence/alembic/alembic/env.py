@@ -11,11 +11,10 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from cryptocurrency_parser.entrypoints.config import PostgresConfig
-from cryptocurrency_parser.infrastructure.persistence.models.base import Base
-
-from cryptocurrency_parser.infrastructure.persistence.models.currency import CurrencyModel
-from cryptocurrency_parser.infrastructure.persistence.models.price_history import PriceHistoryModel
+from entrypoints.config import PostgresConfig
+from infrastructure.persistence.models.base import Base
+from infrastructure.persistence.models.currency import CurrencyModel
+from infrastructure.persistence.models.price_history import PriceHistoryModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

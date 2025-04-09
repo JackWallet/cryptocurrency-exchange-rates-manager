@@ -1,14 +1,14 @@
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cryptocurrency_parser.application.currency.currency_gateway import (
+from application.currency.currency_gateway import (
     CurrencyAdder,
     CurrencyReader,
     CurrencyRemover,
 )
-from cryptocurrency_parser.domain.models.currency.currency import Currency
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.infrastructure.persistence.models.currency import (
+from domain.models.currency.currency import Currency
+from domain.models.currency.currency_id import CurrencyId
+from infrastructure.persistence.models.currency import (
     CurrencyModel,
 )
 
@@ -27,10 +27,30 @@ class SQLAlchemyCurrencyReader(CurrencyReader):
             last_updated=currency_model.last_updated,
         )
 
-    async def get_currency(self, currency_id: CurrencyId) -> Currency | None:
+    async def get_currency_by_id(
+        self,
+        currency_id: CurrencyId,
+    ) -> Currency | None:
         query = select(CurrencyModel).where(CurrencyModel.id == currency_id)
         result = await self._session.execute(query)
         currency = result.scalar_one_or_none()
+
+        return (
+            self._to_domain(currency)
+            if isinstance(currency, CurrencyModel)
+            else None
+        )
+
+    async def get_currency_by_ticker(
+        self,
+        currency_ticker: str,
+    ) -> Currency | None:
+        query = select(CurrencyModel).where(
+            CurrencyModel.ticker == currency_ticker,
+        )
+        result = await self._session.execute(query)
+        currency = result.scalar_one_or_none()
+
         return (
             self._to_domain(currency)
             if isinstance(currency, CurrencyModel)
@@ -61,6 +81,12 @@ class SQLAlchemyCurrencyRemover(CurrencyRemover):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    async def remove_currency(self, currency_id: CurrencyId) -> None:
+    async def remove_currency_by_id(self, currency_id: CurrencyId) -> None:
         query = delete(CurrencyModel).where(CurrencyModel.id == currency_id)
+        await self._session.execute(query)
+
+    async def remove_currency_by_ticker(self, currency_ticker: str) -> None:
+        query = delete(CurrencyModel).where(
+            CurrencyModel.ticker == currency_ticker,
+        )
         await self._session.execute(query)
