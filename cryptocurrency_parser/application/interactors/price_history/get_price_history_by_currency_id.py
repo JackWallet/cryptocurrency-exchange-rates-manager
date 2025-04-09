@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 
 from application.common.interactor import Interactor
-from application.interactors.exceptions import (
-    CurrencyNotFoundError,
-)
+from application.currency.exceptions import CurrencyNotFoundByIdError
 from application.price_history.price_history_gateway import (
     PriceHistoryReader,
 )
@@ -36,10 +34,12 @@ class GetPriceHistoryByCurrencyId(
         self,
         data: GetPriceHistoryByCurrencyIdDTO,
     ) -> GetPriceHistoryByCurrencyIdResultDTO:
-        price_history = await self._price_history_reader.get_price_history_by_currency_id(
-            currency_id=data.currency_id,
+        price_history = (
+            await self._price_history_reader.get_price_history_by_currency_id(
+                currency_id=data.currency_id,
+            )
         )
         if price_history is None:
-            raise CurrencyNotFoundError(entity_id=str(data.currency_id))
+            raise CurrencyNotFoundByIdError(identifier=str(data.currency_id))
 
         return GetPriceHistoryByCurrencyIdResultDTO(currencies=price_history)
