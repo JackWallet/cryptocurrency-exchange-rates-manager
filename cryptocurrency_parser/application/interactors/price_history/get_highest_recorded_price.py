@@ -18,8 +18,13 @@ class GetHighestRecordedPriceDTO:
     currency_id: CurrencyId
 
 
+@dataclass(frozen=True)
+class GetHighestRecordedPriceResultDTO:
+    price_history: PriceHistory
+
+
 class GetHighestRecordedPrice(
-    Interactor[GetHighestRecordedPriceDTO, PriceHistory],
+    Interactor[GetHighestRecordedPriceDTO, GetHighestRecordedPriceResultDTO],
 ):
     def __init__(
         self,
@@ -27,7 +32,9 @@ class GetHighestRecordedPrice(
     ) -> None:
         self._price_history_db_gateway = price_history_db_gateway
 
-    async def __call__(self, data: GetHighestRecordedPriceDTO) -> PriceHistory:
+    async def __call__(
+        self, data: GetHighestRecordedPriceDTO,
+    ) -> GetHighestRecordedPriceResultDTO:
         price_history = await self._price_history_db_gateway.get_highest_recorded_price_by_currency_id(
             currency_id=data.currency_id,
         )
@@ -36,4 +43,4 @@ class GetHighestRecordedPrice(
             raise PriceHistoryRecordNotFoundError(
                 entity_id=str(data.currency_id),
             )
-        return price_history
+        return GetHighestRecordedPriceResultDTO(price_history=price_history)
