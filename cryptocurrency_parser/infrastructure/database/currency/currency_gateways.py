@@ -1,14 +1,14 @@
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cryptocurrency_parser.application.currency.currency_gateway import (
+from application.currency.currency_gateway import (
     CurrencyAdder,
     CurrencyReader,
     CurrencyRemover,
 )
-from cryptocurrency_parser.domain.models.currency.currency import Currency
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
-from cryptocurrency_parser.infrastructure.persistence.models.currency import (
+from domain.models.currency.currency import Currency
+from domain.models.currency.currency_id import CurrencyId
+from infrastructure.persistence.models.currency import (
     CurrencyModel,
 )
 
