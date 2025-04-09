@@ -20,7 +20,7 @@ async def test_get_currency_by_id_exists(
         currency_reader=reader_found,
     )
     input_dto: GetCurrencyByIdDTO = GetCurrencyByIdDTO(
-        currency_id=mock_currency.id,
+        currency_id=mock_currency.id, # type: ignore[arg-type]
     )
     result: GetCurrencyByIdResultDTO = await usecase(
         data=input_dto,
@@ -37,7 +37,7 @@ async def test_get_currency_by_id_does_not_exist(
         currency_reader=reader_not_found,
     )
     input_dto: GetCurrencyByIdDTO = GetCurrencyByIdDTO(
-        currency_id=mock_currency.id,
+        currency_id=mock_currency.id, # type: ignore[arg-type]
     )
     with pytest.raises(CurrencyNotFoundByIdError) as ex:
         await usecase(data=input_dto)
