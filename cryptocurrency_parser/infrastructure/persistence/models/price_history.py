@@ -4,7 +4,7 @@ from decimal import Decimal
 from sqlalchemy import ForeignKey, Numeric
 from sqlalchemy.orm import Mapped, mapped_column
 
-from cryptocurrency_parser.infrastructure.persistence.models.base import Base
+from infrastructure.persistence.models.base import Base
 
 
 class PriceHistoryModel(Base):

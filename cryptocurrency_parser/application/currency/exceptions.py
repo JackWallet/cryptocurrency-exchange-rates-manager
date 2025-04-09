@@ -1,7 +1,7 @@
-from cryptocurrency_parser.application.common.exceptions import (
+from application.common.exceptions import (
     ApplicationError,
 )
-from cryptocurrency_parser.domain.models.currency.currency_id import CurrencyId
+from domain.models.currency.currency_id import CurrencyId
 
 type UserIdentifier = str | CurrencyId
 
