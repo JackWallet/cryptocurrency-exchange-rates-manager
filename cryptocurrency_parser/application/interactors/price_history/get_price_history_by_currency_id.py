@@ -29,14 +29,14 @@ class GetPriceHistoryByCurrencyId(
         GetPriceHistoryByCurrencyIdResultDTO,
     ],
 ):
-    def __init__(self, price_history_db_gateway: PriceHistoryReader) -> None:
-        self._price_history_db_gateway = price_history_db_gateway
+    def __init__(self, price_history_reader: PriceHistoryReader) -> None:
+        self._price_history_reader = price_history_reader
 
     async def __call__(
         self,
         data: GetPriceHistoryByCurrencyIdDTO,
     ) -> GetPriceHistoryByCurrencyIdResultDTO:
-        price_history = await self._price_history_db_gateway.get_price_history_by_currency_id(
+        price_history = await self._price_history_reader.get_price_history_by_currency_id(
             currency_id=data.currency_id,
         )
         if price_history is None:
