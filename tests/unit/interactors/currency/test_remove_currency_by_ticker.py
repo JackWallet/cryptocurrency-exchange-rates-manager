@@ -25,7 +25,7 @@ async def test_remove_currency_by_ticker_exists(
         transaction_manager=transaction_manager,
     )
     input_dto: RemoveCurrencyByTickerDTO = RemoveCurrencyByTickerDTO(
-        currency_ticker=mock_currency.ticker,  # type: ignore[arg-type]
+        currency_ticker=mock_currency.ticker,
     )
     await usecase(data=input_dto)
 
@@ -43,7 +43,7 @@ async def test_remove_currency_by_ticker_does_not_exist(
         transaction_manager=transaction_manager,
     )
     input_dto: RemoveCurrencyByTickerDTO = RemoveCurrencyByTickerDTO(
-        currency_ticker=mock_currency.ticker,  # type: ignore[arg-type]
+        currency_ticker=mock_currency.ticker,
     )
     with pytest.raises(CurrencyNotFoundByTickerError):
         await usecase(data=input_dto)
