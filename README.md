@@ -1,4 +1,7 @@
-# cryptocurrency-parser
+# Cryptocurrency Exchange Rates Manager
+
+![Checks Status](https://github.com/JackWallet/cryptocurrency-exchange-rates-manager/actions/workflows/poetry.yml/badge.svg)
+![Checks Status](https://github.com/JackWallet/cryptocurrency-exchange-rates-manager/actions/workflows/codeql.yml/badge.svg)
 
 # TODO 
 - [x] REST API for the wallet
