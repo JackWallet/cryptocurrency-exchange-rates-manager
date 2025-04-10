@@ -23,4 +23,4 @@ jobs:
         run: poetry install --all-groups
 
       - name: Run tests
-        run: pytest -v -s
+        run: poetry run pytest -v -s
