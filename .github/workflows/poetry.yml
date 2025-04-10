@@ -24,3 +24,6 @@ jobs:
 
       - name: Run tests
         run: poetry run pytest -v -s
+        
+      - name: MyPy check
+        run: poetry run mypy ./cryptocurrency_parser/ tests/
