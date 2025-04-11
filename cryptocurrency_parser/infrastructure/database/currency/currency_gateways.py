@@ -10,6 +10,7 @@ from domain.models.currency.currency import Currency
 from domain.models.currency.currency_id import CurrencyId
 from infrastructure.persistence.models.currency import (
     CurrencyModel,
+    currencies_table,
 )
 
 
@@ -17,45 +18,23 @@ class SQLAlchemyCurrencyReader(CurrencyReader):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    def _to_domain(self, currency_model: CurrencyModel) -> Currency:
-        return Currency(
-            id=CurrencyId(currency_model.id),
-            ticker=currency_model.ticker,
-            full_name=currency_model.full_name,
-            max_supply=currency_model.max_supply,
-            circulating_supply=currency_model.circulating_supply,
-            last_updated=currency_model.last_updated,
-        )
-
     async def get_currency_by_id(
         self,
         currency_id: CurrencyId,
     ) -> Currency | None:
-        query = select(CurrencyModel).where(CurrencyModel.id == currency_id)
+        query = select(Currency).where(currencies_table.c.id == currency_id)
         result = await self._session.execute(query)
-        currency = result.scalar_one_or_none()
-
-        return (
-            self._to_domain(currency)
-            if isinstance(currency, CurrencyModel)
-            else None
-        )
+        return result.scalar_one_or_none()
 
     async def get_currency_by_ticker(
         self,
         currency_ticker: str,
     ) -> Currency | None:
-        query = select(CurrencyModel).where(
-            CurrencyModel.ticker == currency_ticker,
+        query = select(Currency).where(
+            currencies_table.c.ticker == currency_ticker,
         )
         result = await self._session.execute(query)
-        currency = result.scalar_one_or_none()
-
-        return (
-            self._to_domain(currency)
-            if isinstance(currency, CurrencyModel)
-            else None
-        )
+        return result.scalar_one_or_none()
 
 
 class SQLAlchemyCurrencyAdder(CurrencyAdder):
