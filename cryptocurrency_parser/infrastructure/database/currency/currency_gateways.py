@@ -22,9 +22,7 @@ class SQLAlchemyCurrencyReader(CurrencyReader):
         self,
         currency_id: CurrencyId,
     ) -> Currency | None:
-        query = select(Currency).where(currencies_table.c.id == currency_id)
-        result = await self._session.execute(query)
-        return result.scalar_one_or_none()
+        return await self._session.get(Currency, currency_id)
 
     async def get_currency_by_ticker(
         self,
