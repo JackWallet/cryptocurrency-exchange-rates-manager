@@ -93,35 +93,11 @@ class SQLAlchemyPriceHistoryAdder(PriceHistoryAdder):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    def _to_model(
-        self,
-        price_history: PriceHistory,
-    ) -> PriceHistoryModel:
-        return PriceHistoryModel(
-            id=price_history.id,
-            currency_id=CurrencyId(price_history.currency_id),
-            updated_at=price_history.updated_at,
-            market_cap=price_history.market_cap,
-            market_cap_dominance=price_history.market_cap_dominance,
-            price=price_history.price,
-            volume_24h=price_history.volume_24h,
-            circulating_supply=price_history.circulating_supply,
-            percent_change_1h=price_history.percent_change_1h,
-            percent_change_24h=price_history.percent_change_24h,
-            percent_change_7d=price_history.percent_change_7d,
-            percent_change_30d=price_history.percent_change_30d,
-            percent_change_60d=price_history.percent_change_60d,
-            percent_change_90d=price_history.percent_change_90d,
-        )
-
     async def add_price_history_record(
         self,
         price_history: PriceHistory,
     ) -> None:
-        price_history_model: PriceHistoryModel = self._to_model(
-            price_history=price_history,
-        )
-        self._session.add(price_history_model)
+        self._session.add(price_history)
 
 
 class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
