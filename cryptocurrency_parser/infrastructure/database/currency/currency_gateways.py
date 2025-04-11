@@ -8,10 +8,7 @@ from application.currency.currency_gateway import (
 )
 from domain.models.currency.currency import Currency
 from domain.models.currency.currency_id import CurrencyId
-from infrastructure.persistence.models.currency import (
-    CurrencyModel,
-    currencies_table,
-)
+from infrastructure.persistence.models.currency import currencies_table
 
 
 class SQLAlchemyCurrencyReader(CurrencyReader):
@@ -48,11 +45,11 @@ class SQLAlchemyCurrencyRemover(CurrencyRemover):
         self._session = session
 
     async def remove_currency_by_id(self, currency_id: CurrencyId) -> None:
-        query = delete(CurrencyModel).where(CurrencyModel.id == currency_id)
+        query = delete(Currency).where(currencies_table.c.id == currency_id)
         await self._session.execute(query)
 
     async def remove_currency_by_ticker(self, currency_ticker: str) -> None:
-        query = delete(CurrencyModel).where(
-            CurrencyModel.ticker == currency_ticker,
+        query = delete(Currency).where(
+            currencies_table.c.ticker == currency_ticker,
         )
         await self._session.execute(query)
