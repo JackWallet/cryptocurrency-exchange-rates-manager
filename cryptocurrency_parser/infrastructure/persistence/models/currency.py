@@ -1,17 +1,38 @@
-from datetime import datetime
+from sqlalchemy import Column, DateTime, Integer, String, Table, func
 
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from domain.models.currency.currency import Currency
+from infrastructure.persistence.models.base import mapper_registry
 
-from infrastructure.persistence.models.base import Base
+currencies_table = Table(
+    "currencies",
+    mapper_registry.metadata,
+    Column(
+        "id",
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    ),
+    Column(
+        "ticker",
+        String(4),
+    ),
+    Column(
+        "full_name",
+        String(20),
+        unique=True,
+    ),
+    Column(
+        "max_supply",
+        Integer,
+        nullable=True,
+    ),
+    Column("circulating_supply", Integer),
+    Column(
+        "last_updated",
+        DateTime,
+        default=func.now(),
+        onupdate=func.now(),
+    ),
+)
 
-
-class CurrencyModel(Base):
-    __tablename__ = "currencies"
-
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    ticker: Mapped[str] = mapped_column(String(4))
-    full_name: Mapped[str] = mapped_column(String(20), unique=True)
-    max_supply: Mapped[int | None]
-    circulating_supply: Mapped[int]
-    last_updated: Mapped[datetime | None]
+mapper_registry.map_imperatively(Currency, currencies_table)
