@@ -29,9 +29,9 @@ price_history_table = Table(
     Column("circulating_supply", Integer),
     Column("percent_change_1h", Float, nullable=False),
     Column("percent_change_24h", Float, nullable=False),
+    Column("percent_change_7d", Float, nullable=False),
     Column("percent_change_30d", Float, nullable=False),
     Column("percent_change_60d", Float, nullable=False),
-    Column("percent_change_7d", Float, nullable=False),
     Column("percent_change_90d", Float, nullable=False),
 )
 
