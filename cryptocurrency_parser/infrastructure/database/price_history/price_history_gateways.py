@@ -67,18 +67,13 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         currency_id: CurrencyId,
     ) -> PriceHistory | None:
         query = (
-            select(PriceHistoryModel)
-            .where(PriceHistoryModel.currency_id == currency_id)
-            .order_by(PriceHistoryModel.price.desc())
+            select(PriceHistory)
+            .where(price_history_table.c.currency_id == currency_id)
+            .order_by(price_history_table.c.price.desc())
             .limit(1)
         )
         query_result = await self._session.execute(query)
-        price_history = query_result.scalar_one_or_none()
-        return (
-            self._to_domain(price_history_model=price_history)
-            if price_history
-            else None
-        )
+        return query_result.scalar_one_or_none()
 
     async def get_last_record_by_currency_id(
         self,
