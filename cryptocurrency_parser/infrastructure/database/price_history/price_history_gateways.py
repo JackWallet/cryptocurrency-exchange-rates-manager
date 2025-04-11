@@ -108,7 +108,7 @@ class SQLAlchemyPriceHistoryRemover(PriceHistoryRemover):
         self,
         price_history_id: PriceHistoryId,
     ) -> None:
-        query = delete(PriceHistoryModel).where(
-            PriceHistoryModel.id == price_history_id,
+        query = delete(PriceHistory).where(
+            price_history_table.c.id == price_history_id,
         )
         await self._session.execute(query)
