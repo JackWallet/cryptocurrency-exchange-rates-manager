@@ -15,7 +15,7 @@ from infrastructure.persistence.models.base import mapper_registry
 price_history_table = Table(
     "price_history",
     mapper_registry.metadata,
-    Column("price_history", primary_key=True, autoincrement=True),
+    Column("id", Integer, primary_key=True, autoincrement=True),
     Column(
         "currency_id",
         ForeignKey("currencies.id"),
