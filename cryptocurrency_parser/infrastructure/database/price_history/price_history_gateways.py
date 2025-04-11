@@ -52,16 +52,15 @@ class SQLAlchemyPriceHistoryReader(PriceHistoryReader):
         self,
         currency_ids: list[CurrencyId],
     ) -> list[PriceHistory] | None:
-        query = select(PriceHistoryModel).where(
-            and_(PriceHistoryModel.currency_id.in_(currency_ids)),
+        query = select(PriceHistory).where(
+            and_(price_history_table.c.currency_id.in_(currency_ids)),
         )
         query_result = await self._session.execute(query)
-        price_history = query_result.scalars()
-        return (
-            [self._to_domain(record) for record in list(price_history)]
-            if price_history
-            else None
-        )
+        scalars: Sequence[PriceHistory] = query_result.scalars().all()
+        if len(scalars) == 0:
+            return None
+
+        return list(scalars)
 
     async def get_highest_recorded_price_by_currency_id(
         self,
