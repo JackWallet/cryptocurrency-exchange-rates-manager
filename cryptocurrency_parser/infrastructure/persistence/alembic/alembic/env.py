@@ -12,9 +12,9 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from entrypoints.config import PostgresConfig
-from infrastructure.persistence.models.base import Base
-from infrastructure.persistence.models.currency import CurrencyModel
-from infrastructure.persistence.models.price_history import PriceHistoryModel
+from infrastructure.persistence.models.base import mapper_registry
+from infrastructure.persistence.models.currency import currencies_table
+from infrastructure.persistence.models.price_history import price_history_table
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -32,7 +32,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata
+target_metadata = mapper_registry.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -63,7 +63,7 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
-def do_run_migrations(connection: Connection):
+def do_run_migrations(connection: Connection) -> None:
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
