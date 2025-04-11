@@ -39,19 +39,8 @@ class SQLAlchemyCurrencyAdder(CurrencyAdder):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
-    def _to_model(self, currency: Currency) -> CurrencyModel:
-        return CurrencyModel(
-            id=currency.id,
-            ticker=currency.ticker,
-            full_name=currency.full_name,
-            max_supply=currency.max_supply,
-            circulating_supply=currency.circulating_supply,
-            last_updated=currency.last_updated,
-        )
-
     async def save_currency(self, currency: Currency) -> None:
-        currency_model = self._to_model(currency=currency)
-        self._session.add(currency_model)
+        self._session.add(currency)
 
 
 class SQLAlchemyCurrencyRemover(CurrencyRemover):
