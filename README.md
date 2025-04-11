@@ -15,7 +15,7 @@
   - [x] Unit
   - [ ] E2E
 - [ ] Set up GitHub Actions support
-- [ ] Rewrite ORM declarative mapping to imperative one
+- [x] Rewrite ORM declarative mapping to imperative one
 # ENV Variables you want to use:
 - POSTGRES_HOST
 - POSTGRES_PORT
